@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroEscrita | Prof. Coutinho</title>
+    <meta name="description" content="Acelere sua aprovação com correção de redação via áudio e mentoria estratégica baseada em neurociência.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            900: '#0A0A0F', // Fundo mais profundo
+                            800: '#13131A',
+                            700: '#1C1C26',
+                        },
+                        brand: {
+                            purple: '#A855F7',
+                            cyan: '#06B6D4',
+                            green: '#10B981'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'blob': "blob 7s infinite",
+                    },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Textura de ruído para dar acabamento premium */
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+        }
+        
+        /* Efeito de Vidro (Glassmorphism) */
+        .glass-card {
+            background: rgba(19, 19, 26, 0.7); /* Fundo semi-transparente */
+            backdrop-filter: blur(12px); /* Desfoque do que está atrás */
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.1); /* Borda sutil */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gradiente de Texto */
+        .text-gradient-brand {
+            background: linear-gradient(to right, #A855F7, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Brilho intenso no hover */
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-200 font-inter bg-noise overflow-x-hidden">
+
+    <header class="min-h-screen flex items-center justify-center px-4 relative">
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-purple opacity-20 mix-blend-screen filter blur-[100px] animate-blob"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-brand-cyan opacity-20 mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div class="container mx-auto text-center z-10 max-w-4xl pt-20">
+            <div class="inline-flex items-center px-4 py-2 mb-8 rounded-full bg-dark-800/50 border border-brand-purple/30 backdrop-blur-md relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-purple/20 to-brand-cyan/20 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <span class="relative text-brand-purple font-semibold text-sm uppercase tracking-wider">
+                    <i class="fas fa-bolt mr-2 animate-pulse"></i> Vagas abertas para o Intensivo 2026
+                </span>
+            </div>
+
+            <h1 class="font-montserrat text-5xl md:text-7xl font-black leading-tight mb-6 tracking-tight">
+                Sua nota não sobe por falta de <span class="text-gradient-brand relative">Técnica.
+                <svg class="absolute bottom-0 left-0 w-full h-3 opacity-40" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 9C65.5 3 150.5 3 298 9" stroke="url(#paint0_linear)" stroke-width="4" stroke-linecap="round"/><defs><linearGradient id="paint0_linear" x1="2" y1="9" x2="298" y2="9" gradientUnits="userSpaceOnUse"><stop stop-color="#A855F7"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs></svg>
+                </span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                Esqueça as correções automáticas. Receba feedbacks em <strong>ÁUDIO</strong> do Prof. Coutinho e use a neurociência para destravar sua escrita.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                <a href="#planos" class="group relative px-8 py-4 bg-gradient-to-r from-brand-purple to-brand-cyan rounded-xl text-white font-montserrat font-bold text-lg shadow-lg shadow-brand-purple/20 overflow-hidden hover:shadow-brand-cyan/40 transition-all duration-300 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                    <span class="relative flex items-center gap-3">
+                        Quero Garantir Minha Vaga <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </span>
+                </a>
+                <p class="text-gray-500 text-sm mt-2 sm:mt-0">Poucas vagas disponíveis para correção manual.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-24 relative z-10">
+        <div class="container mx-auto px-4">
+            <h2 class="font-montserrat text-3xl md:text-4xl font-bold text-center mb-16">
+                O fim das correções <span class="text-gray-500 line-through decoration-brand-purple/50">genéricas</span>.
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl hover-glow transition-all duration-500 group">
+                    <div class="w-16 h-16 bg-dark-700/50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition relative overflow-hidden">
+                         <div class="absolute inset-0 bg-gradient-to-br from-brand-purple/20 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+                        <i class="fas fa-headset text-3xl text-transparent bg-clip-text bg-gradient-to-br from-brand-purple to-brand-cyan"></i>
+                    </div>
+                    <h3 class="font-montserrat text-xl font-bold mb-4">Correção em Áudio</h3>
+                    <p class="text-gray-400 leading-relaxed">Eu falo com você. Explico a lógica do erro e como melhorar a argumentação, não apenas a gramática. É uma mini-aula particular a cada texto enviado.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl hover-glow transition-all duration-500 group">
+                    <div class="w-16 h-16 bg-dark-700/50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-cyan/20 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+                        <i class="fas fa-brain text-3xl text-transparent bg-clip-text bg-gradient-to-br from-brand-cyan to-blue-500"></i>
+                    </div>
+                    <h3 class="font-montserrat text-xl font-bold mb-4">Método NeuroEscrita</h3>
+                    <p class="text-gray-400 leading-relaxed">Chega de brancos. Aprenda técnicas cognitivas para estruturar o pensamento rapidamente antes de começar a escrever.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl hover-glow transition-all duration-500 group relative">
+                     <div class="absolute -top-3 -right-3 bg-brand-green text-dark-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider transform rotate-12 border-2 border-dark-900">
+                        Bônus do Intensivo
+                    </div>
+                    <div class="w-16 h-16 bg-dark-700/50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-green/20 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+                        <i class="fas fa-book-open text-3xl text-transparent bg-clip-text bg-gradient-to-br from-brand-green to-emerald-400"></i>
+                    </div>
+                    <h3 class="font-montserrat text-xl font-bold mb-4">Clube do Livro</h3>
+                    <p class="text-gray-400 leading-relaxed">Não adianta saber a estrutura e não ter o que dizer. Ganhe repertório sociocultural discutindo obras estratégicas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="planos" class="py-24 relative z-10 bg-dark-800/50">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl bg-brand-purple/10 filter blur-[120px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 relative">
+            <div class="text-center mb-16">
+                <h2 class="font-montserrat text-3xl md:text-5xl font-black mb-6">Escolha seu nível de <span class="text-gradient-brand">intensidade</span>.</h2>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+                    O fator limitante é o meu tempo. As vagas para correção manual com áudio são estritamente limitadas.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
+                
+                <div class="glass-card rounded-3xl p-8 flex flex-col h-full border-dark-700/50 hover:border-brand-purple/30 transition duration-300">
+                    <h3 class="font-montserrat text-2xl font-bold text-gray-100 mb-2">NeuroCorreção</h3>
+                    <p class="text-gray-400 mb-8">O "Plano Treino". Ideal para manter a constância e ajustar a técnica.</p>
+                    
+                    <div class="mb-8 pb-8 border-b border-dark-700/50">
+                        <span class="text-5xl font-black text-white tracking-tight">R$ 97</span>
+                        <span class="text-gray-400 font-medium">/mês</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1 font-medium">
+                        <li class="flex items-start gap-3 text-gray-300">
+                            <i class="fas fa-check-circle text-brand-purple mt-1"></i>
+                            <span>4 Redações por mês (1/sem)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-100">
+                            <i class="fas fa-check-circle text-brand-purple mt-1"></i>
+                            <span class="font-bold">Correção em Áudio + PDF</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-300">
+                            <i class="fas fa-check-circle text-brand-purple mt-1"></i>
+                            <span>Anotações detalhadas</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600 line-through decoration-2 opacity-75">
+                            <i class="fas fa-times-circle h-5 w-5"></i> Mentoria Estratégica
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600 line-through decoration-2 opacity-75">
+                            <i class="fas fa-times-circle h-5 w-5"></i> Clube do Livro
+                        </li>
+                    </ul>
+
+                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20plano%20de%20CORREÇÃO%20de%20redação.%20Como%20faço%20pra%20começar?" target="_blank" class="block w-full py-4 rounded-xl border-2 border-brand-purple/50 text-brand-purple hover:text-white text-center font-montserrat font-bold hover:bg-brand-purple transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/20">
+                        Começar Plano Básico
+                    </a>
+                </div>
+
+                <div class="glass-card rounded-3xl p-1 flex flex-col relative transform md:scale-105 z-20 border-brand-purple/50 shadow-2xl shadow-brand-purple/20">
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-purple to-brand-cyan rounded-3xl blur-xl opacity-20 animate-pulse-slow -z-10"></div>
+                    
+                    <div class="bg-dark-800/80 backdrop-blur-xl rounded-[22px] p-8 flex flex-col h-full">
+                        <div class="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-brand-purple to-brand-cyan text-white text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg">
+                            Recomendado
+                        </div>
+                        
+                        <h3 class="font-montserrat text-3xl font-black text-gradient-brand mb-2">
+                            Neuro Intensivo
+                        </h3>
+                        <p class="text-gray-300 font-medium mb-8">Aceleração total. O ecossistema completo para sua aprovação.</p>
+                        
+                        <div class="mb-8 pb-8 border-b border-dark-700/50">
+                            <div class="flex items-end gap-2">
+                                <span class="text-6xl font-black text-white tracking-tight">R$ 297<small class="text-3xl">,90</small></span>
+                                <span class="text-gray-400 font-medium mb-2">/mês</span>
+                            </div>
+                            <p class="text-brand-green text-sm font-bold mt-2 flex items-center gap-1"><i class="fas fa-arrow-up"></i> Melhor custo-benefício por correção</p>
+                        </div>
+                        
+                        <ul class="space-y-5 mb-10 flex-1 font-medium text-lg">
+                            <li class="flex items-start gap-3 text-white">
+                                <div class="bg-brand-purple/20 p-1 rounded-full text-brand-purple mt-1"><i class="fas fa-rocket"></i></div>
+                                <span class="font-bold">8 Redações por mês (2/sem)</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-200">
+                                <i class="fas fa-check-circle text-brand-cyan mt-1"></i>
+                                <span>Correção em Áudio + PDF</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-200">
+                                <i class="fas fa-check-circle text-brand-cyan mt-1"></i>
+                                <span>Encontro Mensal de Estratégia</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-white bg-gradient-to-r from-brand-purple/20 to-transparent p-3 rounded-xl border-l-4 border-brand-purple">
+                                <i class="fas fa-book-open text-brand-purple"></i> 
+                                <span class="font-bold">Acesso ao Clube do Livro</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-200">
+                                <i class="fas fa-ticket-alt text-brand-cyan mt-1"></i>
+                                <span>Cupom de Desconto p/ Curso Gravado</span>
+                            </li>
+                        </ul>
+
+                        <a href="https://wa.me/5598984417978?text=Fala,%20Coutinho!%20Quero%20o%20plano%20NEURO%20INTENSIVO%20com%202%20correções%20por%20semana.%20Quero%20focar%20total%20na%20aprovação.%20Me%20passa%20os%20detalhes?" target="_blank" class="group relative block w-full py-5 rounded-xl bg-brand-green text-dark-900 text-center font-montserrat font-black text-xl tracking-wide hover:bg-[#0EA371] transition-all duration-300 shadow-lg shadow-brand-green/20 hover:shadow-brand-green/40 hover:-translate-y-1 overflow-hidden">
+                             <div class="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                            <span class="relative flex items-center justify-center gap-2">
+                                QUERO O INTENSIVO <i class="fas fa-whatsapp text-2xl"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 relative z-10 overflow-hidden">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12 max-w-5xl">
+            
+            <div class="w-full md:w-2/5 relative group">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-brand-purple/30 to-brand-cyan/30 rounded-full blur-3xl opacity-70 group-hover:opacity-100 transition duration-700 animate-pulse-slow"></div>
+                
+                <div class="relative rounded-[3rem] rotate-3 group-hover:rotate-0 transition-all duration-500 p-2 bg-gradient-to-br from-brand-purple via-dark-800 to-brand-cyan shadow-2xl">
+                    <div class="rounded-[2.5rem] overflow-hidden bg-dark-800 relative z-10 aspect-[4/5]">
+                        <img src="perfil.png" alt="Professor Coutinho" class="object-cover w-full h-full scale-105 group-hover:scale-100 transition duration-500 filter contrast-110 grayscale-[20%] group-hover:grayscale-0">
+                    </div>
+                </div>
+                
+                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 glass-card px-6 py-3 rounded-full text-brand-purple font-bold border border-brand-purple/30 shadow-lg z-20 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fab fa-instagram"></i> @profecoutinho
+                 </div>
+            </div>
+
+            <div class="w-full md:w-3/5 md:pl-10 mt-12 md:mt-0">
+                <h2 class="font-montserrat text-4xl font-bold mb-8">
+                    Quem é o <span class="text-gradient-brand">Prof. Coutinho?</span>
+                </h2>
+                <div class="space-y-6 text-gray-300 text-lg leading-relaxed font-light">
+                    <p>Há mais de 8 anos na linha de frente dos maiores cursinhos de São Luís, coordenando equipes e vendo o que funciona de verdade.</p>
+                    <p class="glass-card p-4 rounded-xl border-l-4 border-brand-purple font-medium text-white">
+                        Criei o <strong>NeuroEscrita</strong> porque cansei de ver alunos "travados" por modelos prontos. Meu foco é te dar autonomia cognitiva.
+                    </p>
+                    <p>Minha missão não é corrigir redação. É usar a técnica correta para garantir que seu nome esteja na lista de aprovados.</p>
+                    
+                    <div class="mt-8 pt-6 border-t border-dark-700/50">
+                        <span class="font-montserrat font-black text-2xl text-dark-700 uppercase tracking-widest opacity-30 select-none">Coutinho.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark-950 py-10 text-center text-gray-500 text-sm border-t border-dark-800 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="mb-4 flex justify-center gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-brand-purple hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5598984417978" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="mb-2 font-medium text-gray-400">NeuroEscrita &copy; 2026</p>
+            <p>Feito para quem quer mais que a média.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
