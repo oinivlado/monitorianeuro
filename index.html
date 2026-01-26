@@ -1,306 +1,490 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="scroll-smooth">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroEscrita | Prof. Coutinho</title>
-    <meta name="description" content="Acelere sua aprovação com correção de redação via áudio e mentoria estratégica baseada em neurociência.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>NeuroCorreção | Mentoria de Redação</title>
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        montserrat: ['Montserrat', 'sans-serif'],
-                        inter: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        dark: {
-                            900: '#0A0A0F', // Fundo mais profundo
-                            800: '#13131A',
-                            700: '#1C1C26',
-                        },
-                        brand: {
-                            purple: '#A855F7',
-                            cyan: '#06B6D4',
-                            green: '#10B981'
-                        }
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'blob': "blob 7s infinite",
-                    },
-                    keyframes: {
-                        blob: {
-                            "0%": { transform: "translate(0px, 0px) scale(1)" },
-                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
-                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
-                            "100%": { transform: "translate(0px, 0px) scale(1)" },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* Textura de ruído para dar acabamento premium */
-        .bg-noise {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-        }
-        
-        /* Efeito de Vidro (Glassmorphism) */
-        .glass-card {
-            background: rgba(19, 19, 26, 0.7); /* Fundo semi-transparente */
-            backdrop-filter: blur(12px); /* Desfoque do que está atrás */
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(168, 85, 247, 0.1); /* Borda sutil */
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        /* --- VARIÁVEIS DE ESTILO (Identidade Visual NeuroCorreção) --- */
+        :root {
+            --bg-body: #09090b;       /* Preto Profundo */
+            --bg-card: #121214;       /* Cinza Chumbo */
+            --border-color: #27272a;  /* Borda sutil */
+            
+            --primary: #8257e5;       /* Roxo vibrante */
+            --primary-hover: #996dff;
+            --gradient: linear-gradient(90deg, #8257e5 0%, #4f46e5 100%);
+            
+            --text-color: #e1e1e6;    /* Branco Gelo */
+            --text-muted: #a8a8b3;    /* Cinza Confortável */
         }
 
-        /* Gradiente de Texto */
-        .text-gradient-brand {
-            background: linear-gradient(to right, #A855F7, #06B6D4);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        ul { list-style: none; }
+        a { text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- BOTÕES --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            cursor: pointer;
+            text-align: center;
+            width: 100%; /* Botões ocupam largura total nos cards */
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 15px rgba(130, 87, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+        }
+        .btn-whatsapp:hover {
+            background-color: #1ebe57;
+            transform: translateY(-2px);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(130, 87, 229, 0.15) 0%, rgba(9, 9, 11, 0) 60%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* --- SEÇÕES GERAIS --- */
+        section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- CARDS DE BENEFÍCIOS --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 32px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: rgba(130, 87, 229, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- SEÇÃO MENTOR (FOTO + TEXTO) --- */
+        .mentor-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            justify-content: space-between;
+        }
+
+        .mentor-text { flex: 1; }
+        .mentor-img { flex: 1; max-width: 450px; }
+
+        .mentor-img img {
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 40px rgba(130, 87, 229, 0.15);
+        }
+
+        /* --- PREÇOS --- */
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            width: 100%;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(130, 87, 229, 0.15);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .price-title { font-size: 1.5rem; margin-bottom: 8px; color: #fff;}
+        .price-desc { font-size: 0.9rem; color: var(--text-muted); min-height: 40px; }
         
-        /* Brilho intenso no hover */
-        .hover-glow:hover {
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
-            border-color: rgba(168, 85, 247, 0.4);
+        .price-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #fff;
+        }
+        
+        .price-value span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 30px;
+            flex: 1;
+        }
+
+        .price-features li {
+            margin-bottom: 12px;
+            color: #d1d5db;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .price-features li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* --- FAQ --- */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 32px;
+        }
+
+        .faq-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--primary-hover);
+        }
+        
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .mentor-container { flex-direction: column-reverse; text-align: center; }
+            .mentor-img { margin: 0 auto; }
+            .price-card.featured { transform: scale(1); }
+            .faq-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body class="bg-dark-900 text-gray-200 font-inter bg-noise overflow-x-hidden">
+<body>
 
-    <header class="min-h-screen flex items-center justify-center px-4 relative">
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-purple opacity-20 mix-blend-screen filter blur-[100px] animate-blob"></div>
-            <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-brand-cyan opacity-20 mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
-        </div>
-
-        <div class="container mx-auto text-center z-10 max-w-4xl pt-20">
-            <div class="inline-flex items-center px-4 py-2 mb-8 rounded-full bg-dark-800/50 border border-brand-purple/30 backdrop-blur-md relative overflow-hidden group">
-                <div class="absolute inset-0 bg-gradient-to-r from-brand-purple/20 to-brand-cyan/20 opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                <span class="relative text-brand-purple font-semibold text-sm uppercase tracking-wider">
-                    <i class="fas fa-bolt mr-2 animate-pulse"></i> Vagas abertas para o Intensivo 2026
-                </span>
-            </div>
-
-            <h1 class="font-montserrat text-5xl md:text-7xl font-black leading-tight mb-6 tracking-tight">
-                Sua nota não sobe por falta de <span class="text-gradient-brand relative">Técnica.
-                <svg class="absolute bottom-0 left-0 w-full h-3 opacity-40" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 9C65.5 3 150.5 3 298 9" stroke="url(#paint0_linear)" stroke-width="4" stroke-linecap="round"/><defs><linearGradient id="paint0_linear" x1="2" y1="9" x2="298" y2="9" gradientUnits="userSpaceOnUse"><stop stop-color="#A855F7"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs></svg>
-                </span>
-            </h1>
-            
-            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                Esqueça as correções automáticas. Receba feedbacks em <strong>ÁUDIO</strong> do Prof. Coutinho e use a neurociência para destravar sua escrita.
+    <header class="hero">
+        <div class="container">
+            <h1>Sua redação corrigida ao vivo, por quem <span style="white-space: nowrap;">entende o jogo de verdade.</span></h1>
+            <p>
+                Chega de feedbacks genéricos feitos por IA ou comentários rasos como "melhore a coesão". 
+                Eu sento com você por 50 minutos para destravar sua escrita e construir sua nota máxima em tempo real.
             </p>
-
-            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
-                <a href="#planos" class="group relative px-8 py-4 bg-gradient-to-r from-brand-purple to-brand-cyan rounded-xl text-white font-montserrat font-bold text-lg shadow-lg shadow-brand-purple/20 overflow-hidden hover:shadow-brand-cyan/40 transition-all duration-300 hover:-translate-y-1">
-                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                    <span class="relative flex items-center gap-3">
-                        Quero Garantir Minha Vaga <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
-                    </span>
-                </a>
-                <p class="text-gray-500 text-sm mt-2 sm:mt-0">Poucas vagas disponíveis para correção manual.</p>
-            </div>
+            
+            <a href="#investimento" class="btn btn-primary" style="max-width: 300px;">
+                Quero Agendar Minha Mentoria
+            </a>
         </div>
     </header>
 
-    <section class="py-24 relative z-10">
-        <div class="container mx-auto px-4">
-            <h2 class="font-montserrat text-3xl md:text-4xl font-bold text-center mb-16">
-                O fim das correções <span class="text-gray-500 line-through decoration-brand-purple/50">genéricas</span>.
-            </h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-card p-8 rounded-3xl hover-glow transition-all duration-500 group">
-                    <div class="w-16 h-16 bg-dark-700/50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition relative overflow-hidden">
-                         <div class="absolute inset-0 bg-gradient-to-br from-brand-purple/20 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-                        <i class="fas fa-headset text-3xl text-transparent bg-clip-text bg-gradient-to-br from-brand-purple to-brand-cyan"></i>
-                    </div>
-                    <h3 class="font-montserrat text-xl font-bold mb-4">Correção em Áudio</h3>
-                    <p class="text-gray-400 leading-relaxed">Eu falo com você. Explico a lógica do erro e como melhorar a argumentação, não apenas a gramática. É uma mini-aula particular a cada texto enviado.</p>
-                </div>
+    <section>
+        <div class="container">
+            <h2 class="section-title">Direcionamento estratégico, não apenas uma correção.</h2>
+            <p class="section-subtitle">
+                Muitos alunos perdem meses recebendo correções em PDF que não explicam o "como" melhorar. 
+                Na minha mentoria, o processo é humano e direto.
+            </p>
 
-                <div class="glass-card p-8 rounded-3xl hover-glow transition-all duration-500 group">
-                    <div class="w-16 h-16 bg-dark-700/50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-brand-cyan/20 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-                        <i class="fas fa-brain text-3xl text-transparent bg-clip-text bg-gradient-to-br from-brand-cyan to-blue-500"></i>
-                    </div>
-                    <h3 class="font-montserrat text-xl font-bold mb-4">Método NeuroEscrita</h3>
-                    <p class="text-gray-400 leading-relaxed">Chega de brancos. Aprenda técnicas cognitivas para estruturar o pensamento rapidamente antes de começar a escrever.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>50 Minutos de Exclusividade</h3>
+                    <p>Atendimento individual via vídeo. O tempo é seu.</p>
                 </div>
-
-                <div class="glass-card p-8 rounded-3xl hover-glow transition-all duration-500 group relative">
-                     <div class="absolute -top-3 -right-3 bg-brand-green text-dark-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider transform rotate-12 border-2 border-dark-900">
-                        Bônus do Intensivo
-                    </div>
-                    <div class="w-16 h-16 bg-dark-700/50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-brand-green/20 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-                        <i class="fas fa-book-open text-3xl text-transparent bg-clip-text bg-gradient-to-br from-brand-green to-emerald-400"></i>
-                    </div>
-                    <h3 class="font-montserrat text-xl font-bold mb-4">Clube do Livro</h3>
-                    <p class="text-gray-400 leading-relaxed">Não adianta saber a estrutura e não ter o que dizer. Ganhe repertório sociocultural discutindo obras estratégicas.</p>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Análise de Especialista</h3>
+                    <p>Mais de 8 anos de experiência no mercado e coordenação de redação. Nada de respostas automáticas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Repertório e Leitura</h3>
+                    <p>Orientações personalizadas para o seu estilo de escrita, focadas no ENEM e na UEMA.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Solução Imediata</h3>
+                    <p>Você tira suas dúvidas na hora e entende exatamente como não repetir o mesmo erro.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="planos" class="py-24 relative z-10 bg-dark-800/50">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl bg-brand-purple/10 filter blur-[120px] pointer-events-none"></div>
-
-        <div class="container mx-auto px-4 relative">
-            <div class="text-center mb-16">
-                <h2 class="font-montserrat text-3xl md:text-5xl font-black mb-6">Escolha seu nível de <span class="text-gradient-brand">intensidade</span>.</h2>
-                <p class="text-gray-300 text-lg max-w-2xl mx-auto">
-                    O fator limitante é o meu tempo. As vagas para correção manual com áudio são estritamente limitadas.
-                </p>
+    <section>
+        <div class="container">
+            <div class="mentor-container">
+                <div class="mentor-text">
+                    <h2 class="section-title" style="text-align: left;">Quem é o seu Mentor</h2>
+                    <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 20px;">Prof. Coutinho</h3>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px;">
+                        Especialista em escrita, gramática e literatura. Com uma trajetória sólida em São Luís, já coordenei departamentos de redação e treinei equipes de corretores.
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">
+                        Desenvolvi um método que foge das fórmulas prontas; aqui, você aprende a escrever com consciência e repertório de verdade. Eu não entrego apenas uma nota; entrego a estratégia para a sua aprovação.
+                    </p>
+                </div>
+                <div class="mentor-img">
+                    <img src="perfil.png" alt="Prof. Coutinho">
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
+    <section id="investimento">
+        <div class="container">
+            <h2 class="section-title">Planos e Investimento</h2>
+            <p class="section-subtitle">Escolha como quer evoluir sua escrita.</p>
+
+            <div class="pricing-grid">
                 
-                <div class="glass-card rounded-3xl p-8 flex flex-col h-full border-dark-700/50 hover:border-brand-purple/30 transition duration-300">
-                    <h3 class="font-montserrat text-2xl font-bold text-gray-100 mb-2">NeuroCorreção</h3>
-                    <p class="text-gray-400 mb-8">O "Plano Treino". Ideal para manter a constância e ajustar a técnica.</p>
+                <div class="price-card">
+                    <h3 class="price-title">Avulso</h3>
+                    <p class="price-desc">Ideal para um ajuste pontual ou tirar dúvidas específicas.</p>
+                    <div class="price-value">R$ 90<span>,00</span></div>
                     
-                    <div class="mb-8 pb-8 border-b border-dark-700/50">
-                        <span class="text-5xl font-black text-white tracking-tight">R$ 97</span>
-                        <span class="text-gray-400 font-medium">/mês</span>
-                    </div>
-                    
-                    <ul class="space-y-4 mb-8 flex-1 font-medium">
-                        <li class="flex items-start gap-3 text-gray-300">
-                            <i class="fas fa-check-circle text-brand-purple mt-1"></i>
-                            <span>4 Redações por mês (1/sem)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-gray-100">
-                            <i class="fas fa-check-circle text-brand-purple mt-1"></i>
-                            <span class="font-bold">Correção em Áudio + PDF</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-gray-300">
-                            <i class="fas fa-check-circle text-brand-purple mt-1"></i>
-                            <span>Anotações detalhadas</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-600 line-through decoration-2 opacity-75">
-                            <i class="fas fa-times-circle h-5 w-5"></i> Mentoria Estratégica
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-600 line-through decoration-2 opacity-75">
-                            <i class="fas fa-times-circle h-5 w-5"></i> Clube do Livro
-                        </li>
+                    <ul class="price-features">
+                        <li>1 Encontro de 50 minutos</li>
+                        <li>Tema da redação incluso</li>
+                        <li>Correção ao vivo</li>
                     </ul>
 
-                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20plano%20de%20CORREÇÃO%20de%20redação.%20Como%20faço%20pra%20começar?" target="_blank" class="block w-full py-4 rounded-xl border-2 border-brand-purple/50 text-brand-purple hover:text-white text-center font-montserrat font-bold hover:bg-brand-purple transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/20">
-                        Começar Plano Básico
+                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Gostaria%20de%20agendar%20um%20encontro%20avulso%20de%20mentoria." target="_blank" class="btn btn-outline">
+                        Quero o Avulso
                     </a>
                 </div>
 
-                <div class="glass-card rounded-3xl p-1 flex flex-col relative transform md:scale-105 z-20 border-brand-purple/50 shadow-2xl shadow-brand-purple/20">
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-purple to-brand-cyan rounded-3xl blur-xl opacity-20 animate-pulse-slow -z-10"></div>
+                <div class="price-card featured">
+                    <div class="badge">MAIS PROCURADO</div>
+                    <h3 class="price-title">Mensal (1x Semana)</h3>
+                    <p class="price-desc">O acompanhamento ideal para criar constância e evolução.</p>
+                    <div class="price-value">R$ 280<span>,00/mês</span></div>
                     
-                    <div class="bg-dark-800/80 backdrop-blur-xl rounded-[22px] p-8 flex flex-col h-full">
-                        <div class="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-brand-purple to-brand-cyan text-white text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg">
-                            Recomendado
-                        </div>
-                        
-                        <h3 class="font-montserrat text-3xl font-black text-gradient-brand mb-2">
-                            Neuro Intensivo
-                        </h3>
-                        <p class="text-gray-300 font-medium mb-8">Aceleração total. O ecossistema completo para sua aprovação.</p>
-                        
-                        <div class="mb-8 pb-8 border-b border-dark-700/50">
-                            <div class="flex items-end gap-2">
-                                <span class="text-6xl font-black text-white tracking-tight">R$ 297<small class="text-3xl">,90</small></span>
-                                <span class="text-gray-400 font-medium mb-2">/mês</span>
-                            </div>
-                            <p class="text-brand-green text-sm font-bold mt-2 flex items-center gap-1"><i class="fas fa-arrow-up"></i> Melhor custo-benefício por correção</p>
-                        </div>
-                        
-                        <ul class="space-y-5 mb-10 flex-1 font-medium text-lg">
-                            <li class="flex items-start gap-3 text-white">
-                                <div class="bg-brand-purple/20 p-1 rounded-full text-brand-purple mt-1"><i class="fas fa-rocket"></i></div>
-                                <span class="font-bold">8 Redações por mês (2/sem)</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-gray-200">
-                                <i class="fas fa-check-circle text-brand-cyan mt-1"></i>
-                                <span>Correção em Áudio + PDF</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-gray-200">
-                                <i class="fas fa-check-circle text-brand-cyan mt-1"></i>
-                                <span>Encontro Mensal de Estratégia</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-white bg-gradient-to-r from-brand-purple/20 to-transparent p-3 rounded-xl border-l-4 border-brand-purple">
-                                <i class="fas fa-book-open text-brand-purple"></i> 
-                                <span class="font-bold">Acesso ao Clube do Livro</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-gray-200">
-                                <i class="fas fa-ticket-alt text-brand-cyan mt-1"></i>
-                                <span>Cupom de Desconto p/ Curso Gravado</span>
-                            </li>
-                        </ul>
+                    <ul class="price-features">
+                        <li><strong>4 Encontros</strong> de 50 min/mês</li>
+                        <li>Horário fixo semanal garantido</li>
+                        <li>Acesso ao Grupo VIP</li>
+                        <li>Temas e repertórios exclusivos</li>
+                    </ul>
 
-                        <a href="https://wa.me/5598984417978?text=Fala,%20Coutinho!%20Quero%20o%20plano%20NEURO%20INTENSIVO%20com%202%20correções%20por%20semana.%20Quero%20focar%20total%20na%20aprovação.%20Me%20passa%20os%20detalhes?" target="_blank" class="group relative block w-full py-5 rounded-xl bg-brand-green text-dark-900 text-center font-montserrat font-black text-xl tracking-wide hover:bg-[#0EA371] transition-all duration-300 shadow-lg shadow-brand-green/20 hover:shadow-brand-green/40 hover:-translate-y-1 overflow-hidden">
-                             <div class="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                            <span class="relative flex items-center justify-center gap-2">
-                                QUERO O INTENSIVO <i class="fas fa-whatsapp text-2xl"></i>
-                            </span>
-                        </a>
-                    </div>
+                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Tenho%20interesse%20no%20Plano%20Mensal%20de%201%20encontro%20por%20semana." target="_blank" class="btn btn-primary">
+                        Quero 1x por Semana
+                    </a>
+                </div>
+
+                <div class="price-card">
+                    <h3 class="price-title">Mensal (2x Semana)</h3>
+                    <p class="price-desc">Aceleração total para quem quer dominar o texto rapidamente.</p>
+                    <div class="price-value">R$ 480<span>,00/mês</span></div>
+                    
+                    <ul class="price-features">
+                        <li><strong>8 Encontros</strong> de 50 min/mês</li>
+                        <li>Dois horários fixos semanais</li>
+                        <li>Acesso ao Grupo VIP</li>
+                        <li>Aceleração de resultados</li>
+                    </ul>
+
+                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Quero%20acelerar%20meus%20resultados%20com%20o%20Plano%20Mensal%20de%202%20encontros%20por%20semana." target="_blank" class="btn btn-outline">
+                        Quero 2x por Semana
+                    </a>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section class="py-24 relative z-10 overflow-hidden">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12 max-w-5xl">
-            
-            <div class="w-full md:w-2/5 relative group">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-brand-purple/30 to-brand-cyan/30 rounded-full blur-3xl opacity-70 group-hover:opacity-100 transition duration-700 animate-pulse-slow"></div>
-                
-                <div class="relative rounded-[3rem] rotate-3 group-hover:rotate-0 transition-all duration-500 p-2 bg-gradient-to-br from-brand-purple via-dark-800 to-brand-cyan shadow-2xl">
-                    <div class="rounded-[2.5rem] overflow-hidden bg-dark-800 relative z-10 aspect-[4/5]">
-                        <img src="perfil.png" alt="Professor Coutinho" class="object-cover w-full h-full scale-105 group-hover:scale-100 transition duration-500 filter contrast-110 grayscale-[20%] group-hover:grayscale-0">
-                    </div>
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title">Dúvidas Frequentes</h2>
+            <br>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Posso corrigir mais de uma redação por encontro?</h3>
+                    <p>Sim, é possível. No entanto, dependendo da complexidade do seu texto, nem sempre isso será viável. Nosso foco não é apenas "corrigir o maior número de folhas", mas garantir que você aprenda.</p>
                 </div>
-                
-                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 glass-card px-6 py-3 rounded-full text-brand-purple font-bold border border-brand-purple/30 shadow-lg z-20 flex items-center gap-2 whitespace-nowrap">
-                    <i class="fab fa-instagram"></i> @profecoutinho
-                 </div>
-            </div>
-
-            <div class="w-full md:w-3/5 md:pl-10 mt-12 md:mt-0">
-                <h2 class="font-montserrat text-4xl font-bold mb-8">
-                    Quem é o <span class="text-gradient-brand">Prof. Coutinho?</span>
-                </h2>
-                <div class="space-y-6 text-gray-300 text-lg leading-relaxed font-light">
-                    <p>Há mais de 8 anos na linha de frente dos maiores cursinhos de São Luís, coordenando equipes e vendo o que funciona de verdade.</p>
-                    <p class="glass-card p-4 rounded-xl border-l-4 border-brand-purple font-medium text-white">
-                        Criei o <strong>NeuroEscrita</strong> porque cansei de ver alunos "travados" por modelos prontos. Meu foco é te dar autonomia cognitiva.
-                    </p>
-                    <p>Minha missão não é corrigir redação. É usar a técnica correta para garantir que seu nome esteja na lista de aprovados.</p>
-                    
-                    <div class="mt-8 pt-6 border-t border-dark-700/50">
-                        <span class="font-montserrat font-black text-2xl text-dark-700 uppercase tracking-widest opacity-30 select-none">Coutinho.</span>
-                    </div>
+                <div class="faq-item">
+                    <h3>Vou receber minha redação corrigida em PDF também?</h3>
+                    <p>Sim. Além de toda a discussão ao vivo, você recebe o PDF com as marcações feitas durante a mentoria para sua revisão posterior.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Os horários são marcados?</h3>
+                    <p>Sim. Para os planos mensais, você terá seu horário fixo garantido toda semana. Compromisso e rotina são fundamentais para a aprovação.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Por que esse atendimento é melhor que uma correção comum?</h3>
+                    <p>Aqui existe análise de rendimento. Eu não aponto apenas o erro; eu te mostro como o seu cérebro está processando a escrita e como ajustar essa engrenagem para ganhar tempo e nota.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Posso tirar dúvidas esporádicas?</h3>
+                    <p>Sim, alunos do plano mensal têm suporte para dúvidas pontuais via WhatsApp durante a semana.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Se eu não tiver uma redação pronta, ainda posso ter o horário?</h3>
+                    <p>Sim. Podemos usar o encontro para melhorar suas estratégias de planejamento, discutir eixos temáticos ou aprofundar repertórios específicos.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-dark-950 py-10 text-center text-gray-500 text-sm border-t border-dark-800 relative z-10">
-        <div class="container mx-auto px-4">
-            <div class="mb-4 flex justify-center gap-4">
-                <a href="#" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-brand-purple hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/5598984417978" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p class="mb-2 font-medium text-gray-400">NeuroEscrita &copy; 2026</p>
-            <p>Feito para quem quer mais que a média.</p>
+    <footer>
+        <div class="container">
+            <h3 style="color: #fff; margin-bottom: 10px;">NeuroCorreção</h3>
+            <p>Prof. Coutinho - Todos os direitos reservados.</p>
         </div>
     </footer>
 
