@@ -3,488 +3,1377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroCorreção | Mentoria de Redação</title>
-    
+    <title>NeuroEscrita | Prof. Coutinho</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIÁVEIS DE ESTILO (Identidade Visual NeuroCorreção) --- */
         :root {
-            --bg-body: #09090b;       /* Preto Profundo */
-            --bg-card: #121214;       /* Cinza Chumbo */
-            --border-color: #27272a;  /* Borda sutil */
-            
-            --primary: #8257e5;       /* Roxo vibrante */
-            --primary-hover: #996dff;
-            --gradient: linear-gradient(90deg, #8257e5 0%, #4f46e5 100%);
-            
-            --text-color: #e1e1e6;    /* Branco Gelo */
-            --text-muted: #a8a8b3;    /* Cinza Confortável */
+            --ink: #080a08;
+            --ink-soft: #0f130f;
+            --ink-muted: #181f18;
+            --accent: #2d6a4f;
+            --accent-light: #52b788;
+            --accent-bright: #74c69d;
+            --copper: #b87333;
+            --copper-light: #d4956a;
+            --accent-dim: rgba(45, 106, 79, 0.12);
+            --accent-glow: rgba(82, 183, 136, 0.2);
+            --cream: #f0ebe0;
+            --cream-soft: #e8e2d6;
+            --text: #e8ede8;
+            --text-muted: #8a9e8a;
+            --border: rgba(82, 183, 136, 0.15);
+            --border-copper: rgba(184, 115, 51, 0.25);
+            --radius: 3px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-body);
-            color: var(--text-color);
-            line-height: 1.6;
+            background-color: var(--ink);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
         }
 
-        ul { list-style: none; }
-        a { text-decoration: none; }
+        /* NOISE TEXTURE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
         img { max-width: 100%; display: block; }
 
         .container {
             width: 100%;
-            max-width: 1120px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 32px;
         }
 
-        /* --- BOTÕES --- */
-        .btn {
-            display: inline-flex;
+        /* ---- DECORATIVE LINES ---- */
+        .deco-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-light), transparent);
+            margin: 0 auto 20px;
+        }
+
+        /* ---- HEADER / NAV ---- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 20px 0;
+            background: linear-gradient(to bottom, rgba(12,12,15,0.95), transparent);
+            backdrop-filter: blur(8px);
+        }
+
+        nav .container {
+            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 32px;
-            border-radius: 6px;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            font-size: 1rem;
+            color: var(--accent-bright);
+            letter-spacing: 0.04em;
+        }
+
+        .logo span {
+            display: block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
             text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav-cta {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            border: 1px solid var(--border);
+            padding: 10px 22px;
+            border-radius: var(--radius);
             transition: 0.3s;
-            cursor: pointer;
-            text-align: center;
-            width: 100%; /* Botões ocupam largura total nos cards */
         }
 
-        .btn-primary {
-            background: var(--gradient);
-            color: #fff;
-            border: none;
-            box-shadow: 0 4px 15px rgba(130, 87, 229, 0.3);
+        .nav-cta:hover {
+            background: var(--accent-dim);
+            border-color: var(--accent-light);
         }
 
-        .btn-primary:hover {
-            filter: brightness(1.1);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-        }
-
-        .btn-whatsapp {
-            background-color: #25D366;
-            color: white;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
-        }
-        .btn-whatsapp:hover {
-            background-color: #1ebe57;
-            transform: translateY(-2px);
-        }
-
-        /* --- HERO SECTION --- */
+        /* ---- HERO ---- */
         .hero {
-            padding: 100px 0 80px;
-            text-align: center;
-            background: radial-gradient(circle at center, rgba(130, 87, 229, 0.15) 0%, rgba(9, 9, 11, 0) 60%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px; left: -200px;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(45,106,79,0.15) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px; right: -100px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(184,115,51,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .hero-eyebrow span {
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent-light);
+        }
+
+        .hero-eyebrow::after {
+            content: '';
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-light), transparent);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.8rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 24px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 5vw, 4.8rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 28px;
+            color: #fff;
         }
 
-        .hero h1 span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent-bright);
         }
 
-        .hero p {
-            font-size: 1.25rem;
+        .hero-desc {
+            font-size: 1.05rem;
             color: var(--text-muted);
-            max-width: 800px;
-            margin: 0 auto 40px;
+            line-height: 1.8;
+            max-width: 520px;
+            margin-bottom: 48px;
         }
 
-        /* --- SEÇÕES GERAIS --- */
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--accent) 0%, #1b4332 100%);
+            color: var(--accent-bright);
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: var(--radius);
+            transition: 0.3s;
+            border: 1px solid var(--accent);
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(45,106,79,0.35);
+            background: linear-gradient(135deg, #2d6a4f 0%, #245741 100%);
+            border-color: var(--accent-light);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: var(--radius);
+            border: 1px solid rgba(138,158,138,0.2);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-ghost:hover {
+            color: var(--text);
+            border-color: var(--border);
+            background: var(--accent-dim);
+        }
+
+        /* HERO IMAGE CARD */
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .hero-photo-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(12,12,15,0.85) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-photo-wrap img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 8px;
+            filter: sepia(10%) contrast(1.05);
+        }
+
+        .hero-photo-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 28px;
+            z-index: 2;
+        }
+
+        .hero-photo-caption h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .hero-photo-caption p {
+            font-size: 0.8rem;
+            color: var(--accent-light);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: -16px; right: -16px;
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, var(--copper) 0%, #8a5a28 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            animation: spin-slow 20s linear infinite;
+        }
+
+        .hero-badge strong {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .hero-badge span {
+            font-size: 0.5rem;
+            color: rgba(255,255,255,0.85);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-align: center;
+        }
+
+        @keyframes spin-slow {
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-frame {
+            position: absolute;
+            top: -12px; left: -12px; right: 12px; bottom: -12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        /* ---- SEÇÃO SEPARADORA ---- */
+        .marquee-section {
+            padding: 24px 0;
+            background: var(--accent-dim);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 60px;
+            animation: marquee 25s linear infinite;
+            white-space: nowrap;
+        }
+
+        .marquee-track span {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            opacity: 0.7;
+        }
+
+        .marquee-track .dot {
+            color: var(--accent-light);
+            opacity: 0.4;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* ---- SECTIONS ---- */
         section {
-            padding: 80px 0;
-            border-top: 1px solid var(--border-color);
+            padding: 100px 0;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent-light);
         }
 
         .section-title {
-            font-size: 2.25rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
             font-weight: 700;
-            margin-bottom: 16px;
             color: #fff;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--accent-bright);
+        }
+
+        .section-body {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.85;
+        }
+
+        /* ---- MODALIDADE CARDS ---- */
+        .modality-section { background: var(--ink-soft); }
+
+        .modality-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-top: 60px;
+        }
+
+        .modality-card {
+            background: var(--ink);
+            padding: 56px 48px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .modality-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 0;
+            background: var(--accent-light);
+            transition: height 0.4s;
+        }
+
+        .modality-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 0;
+            background: linear-gradient(to bottom, var(--accent-bright), var(--copper));
+            transition: height 0.4s;
+        }
+
+        .modality-card:hover::before { height: 100%; }
+
+        .modality-card:hover { background: var(--ink-muted); }
+
+        .modality-icon {
+            font-size: 2.5rem;
+            margin-bottom: 28px;
+            display: block;
+        }
+
+        .modality-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .modality-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            border: 1px solid var(--border);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+
+        .modality-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        .modality-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            color: var(--accent-bright);
+            font-weight: 600;
+        }
+
+        .modality-price sub {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            vertical-align: middle;
+        }
+
+        /* ---- PILARES ---- */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            margin-top: 60px;
+            background: var(--border);
+        }
+
+        .pillar {
+            background: var(--ink);
+            padding: 48px 36px;
+            transition: 0.3s;
+        }
+
+        .pillar:hover {
+            background: var(--ink-soft);
+        }
+
+        .pillar-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(45,106,79,0.2);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .pillar h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .pillar p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.75;
+        }
+
+        /* ---- MENTOR ---- */
+        .mentor-section {
+            background: var(--ink-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mentor-section::before {
+            content: '';
+            position: absolute;
+            right: -200px; top: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(45,106,79,0.08) 0%, transparent 65%);
+        }
+
+        .mentor-grid {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .mentor-photo-wrap {
+            position: relative;
+        }
+
+        .mentor-photo-wrap img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 4px;
+            filter: sepia(15%) contrast(1.08) saturate(0.85);
+        }
+
+        .mentor-photo-frame {
+            position: absolute;
+            top: 20px; left: 20px; right: -20px; bottom: -20px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            z-index: -1;
+        }
+
+        .mentor-photo-quote {
+            position: absolute;
+            bottom: -24px; right: -24px;
+            background: linear-gradient(135deg, var(--copper) 0%, #8a5a28 100%);
+            color: #fff;
+            padding: 16px 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            max-width: 180px;
             text-align: center;
         }
 
-        .section-subtitle {
-            text-align: center;
+        .mentor-content { padding-top: 20px; }
+
+        .mentor-content .section-title { margin-bottom: 4px; }
+
+        .mentor-role {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .mentor-content p {
             color: var(--text-muted);
+            line-height: 1.9;
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        .mentor-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent-bright);
+            font-weight: 700;
+        }
+
+        .stat span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        /* ---- PLANOS ---- */
+        .plans-section { background: var(--ink); }
+
+        .plans-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .plans-header .section-label { justify-content: center; }
+        .plans-header .section-label::before { display: none; }
+
+        /* MODALIDADE TOGGLE */
+        .modality-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
             margin-bottom: 60px;
-            font-size: 1.1rem;
-            max-width: 700px;
+        }
+
+        .toggle-btn {
+            padding: 12px 32px;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--text-muted);
+            background: transparent;
+        }
+
+        .toggle-btn:first-child { border-radius: 4px 0 0 4px; border-right: none; }
+        .toggle-btn:last-child { border-radius: 0 4px 4px 0; border-left: none; }
+
+        .toggle-btn.active {
+            background: var(--accent-light);
+            color: var(--ink);
+            border-color: var(--accent-light);
+            font-weight: 600;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .plan-card {
+            background: var(--ink-soft);
+            padding: 48px 36px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .plan-card:hover {
+            background: var(--ink-muted);
+        }
+
+        .plan-card.featured {
+            background: var(--ink);
+            border: 1px solid var(--accent-light);
+            margin: -1px;
+            z-index: 2;
+        }
+
+        .plan-featured-badge {
+            position: absolute;
+            top: -1px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--copper) 0%, #8a5a28 100%);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 5px 16px;
+        }
+
+        .plan-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .plan-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            min-height: 48px;
+            line-height: 1.6;
+        }
+
+        .plan-price {
+            margin-bottom: 36px;
+        }
+
+        .plan-price strong {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--accent-bright);
+            font-weight: 700;
+        }
+
+        .plan-price span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .plan-price .installment {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .plan-features {
+            list-style: none;
+            flex: 1;
+            margin-bottom: 36px;
+        }
+
+        .plan-features li {
+            display: flex;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            align-items: flex-start;
+            line-height: 1.5;
+        }
+
+        .plan-features li::before {
+            content: '—';
+            color: var(--accent-light);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .btn-plan-gold {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 28px;
+            background: linear-gradient(135deg, var(--accent) 0%, #1b4332 100%);
+            color: var(--accent-bright);
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: var(--radius);
+            transition: 0.3s;
+            border: 1px solid var(--accent);
+            cursor: pointer;
+        }
+
+        .btn-plan-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(45,106,79,0.35);
+            border-color: var(--accent-light);
+        }
+
+        .btn-plan-outline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 28px;
+            background: transparent;
+            color: var(--accent-light);
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-plan-outline:hover {
+            background: var(--accent-dim);
+            border-color: var(--accent-light);
+        }
+
+        /* ---- FAQ ---- */
+        .faq-section { background: var(--ink-soft); }
+
+        .faq-header { max-width: 600px; margin-bottom: 60px; }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .faq-item {
+            background: var(--ink);
+            padding: 36px 40px;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover { background: var(--ink-soft); }
+
+        .faq-item h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.8;
+        }
+
+        /* ---- CTA FINAL ---- */
+        .cta-section {
+            background: var(--ink);
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(130,87,229,0.1) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .cta-section .section-label { justify-content: center; }
+        .cta-section .section-label::before { display: none; }
+
+        .cta-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            color: #fff;
+            max-width: 800px;
+            margin: 0 auto 16px;
+            line-height: 1.2;
+        }
+
+        .cta-quote em { color: var(--accent-bright); font-style: italic; }
+
+        .cta-sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 48px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* --- CARDS DE BENEFÍCIOS --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 32px;
-            transition: 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            background: rgba(130, 87, 229, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* --- SEÇÃO MENTOR (FOTO + TEXTO) --- */
-        .mentor-container {
+        .cta-actions {
             display: flex;
-            align-items: center;
-            gap: 60px;
-            justify-content: space-between;
-        }
-
-        .mentor-text { flex: 1; }
-        .mentor-img { flex: 1; max-width: 450px; }
-
-        .mentor-img img {
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 0 40px rgba(130, 87, 229, 0.15);
-        }
-
-        /* --- PREÇOS --- */
-        .pricing-grid {
-            display: flex;
+            gap: 16px;
             justify-content: center;
-            gap: 30px;
             flex-wrap: wrap;
         }
 
-        .price-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 32px;
-            width: 100%;
-            max-width: 340px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .price-card.featured {
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 30px rgba(130, 87, 229, 0.15);
-            transform: scale(1.05);
-            z-index: 2;
-        }
-
-        .badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
-
-        .price-title { font-size: 1.5rem; margin-bottom: 8px; color: #fff;}
-        .price-desc { font-size: 0.9rem; color: var(--text-muted); min-height: 40px; }
-        
-        .price-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 20px 0;
-            color: #fff;
-        }
-        
-        .price-value span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
-
-        .price-features {
-            list-style: none;
-            margin-bottom: 30px;
-            flex: 1;
-        }
-
-        .price-features li {
-            margin-bottom: 12px;
-            color: #d1d5db;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.95rem;
-        }
-
-        .price-features li::before {
-            content: "✓";
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* --- FAQ --- */
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 32px;
-        }
-
-        .faq-item h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--primary-hover);
-        }
-        
-        .faq-item p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* --- FOOTER --- */
+        /* ---- FOOTER ---- */
         footer {
-            text-align: center;
             padding: 40px 0;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
         }
 
-        /* --- RESPONSIVO --- */
-        @media (max-width: 900px) {
-            .hero h1 { font-size: 2.5rem; }
-            .mentor-container { flex-direction: column-reverse; text-align: center; }
-            .mentor-img { margin: 0 auto; }
-            .price-card.featured { transform: scale(1); }
-            .faq-grid { grid-template-columns: 1fr; }
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ---- RESPONSIVE ---- */
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; gap: 60px; }
+            .hero-visual { max-width: 380px; margin: 0 auto; }
+            .modality-grid { grid-template-columns: 1fr; }
+            .pillars-grid { grid-template-columns: 1fr; }
+            .mentor-grid { grid-template-columns: 1fr; }
+            .mentor-photo-wrap { max-width: 400px; }
+            .plans-grid { grid-template-columns: 1fr; background: none; gap: 20px; }
+            .plan-card.featured { margin: 0; }
+            .faq-grid { grid-template-columns: 1fr; }
+            footer .container { flex-direction: column; gap: 16px; text-align: center; }
+            .mentor-stats { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 0 20px; }
+            nav { padding: 16px 0; }
+            .nav-cta { display: none; }
+            .hero { padding: 100px 0 60px; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-desc { font-size: 0.95rem; }
+            .hero-actions { flex-direction: column; }
+            .hero-actions .btn-gold,
+            .hero-actions .btn-ghost { width: 100%; justify-content: center; }
+            .hero-badge { width: 72px; height: 72px; top: -10px; right: -10px; }
+            .hero-badge strong { font-size: 1.2rem; }
+            section { padding: 64px 0; }
+            .section-title { font-size: 1.8rem; }
+            .modality-card { padding: 36px 24px; }
+            .modality-price { font-size: 2.2rem; }
+            .pillar { padding: 32px 24px; }
+            .pillar-number { font-size: 3rem; }
+            .mentor-stats { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .mentor-content { padding-top: 48px; }
+            .mentor-photo-quote { font-size: 0.65rem; padding: 12px 14px; max-width: 150px; }
+            .plan-card { padding: 36px 24px; }
+            .plan-price strong { font-size: 2.2rem; }
+            .faq-item { padding: 28px 24px; }
+            .cta-section { padding: 80px 0; }
+            .cta-quote { font-size: 1.7rem; }
+            .cta-actions { flex-direction: column; align-items: center; }
+            .cta-actions .btn-gold,
+            .cta-actions .btn-ghost { width: 100%; max-width: 340px; justify-content: center; }
+            .marquee-track { gap: 32px; }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .fade-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .fade-up-delay-2 { animation-delay: 0.25s; opacity: 0; }
+        .fade-up-delay-3 { animation-delay: 0.4s; opacity: 0; }
     </style>
 </head>
 <body>
 
+    <!-- NAV -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                NeuroEscrita
+                <span>Prof. Coutinho · São Luís — MA</span>
+            </div>
+            <a href="#planos" class="nav-cta">Ver Planos</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
     <header class="hero">
         <div class="container">
-            <h1>Sua redação corrigida ao vivo, por quem <span style="white-space: nowrap;">entende o jogo de verdade.</span></h1>
-            <p>
-                Chega de feedbacks genéricos feitos por IA ou comentários rasos como "melhore a coesão". 
-                Eu sento com você por 50 minutos para destravar sua escrita e construir sua nota máxima em tempo real.
-            </p>
-            
-            <a href="#investimento" class="btn btn-primary" style="max-width: 300px;">
-                Quero Agendar Minha Mentoria
-            </a>
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <div class="hero-eyebrow fade-up">
+                        <span>Mentoria Individual de Redação</span>
+                    </div>
+                    <h1 class="fade-up fade-up-delay-1">
+                        Escreva com<br><em>inteligência.</em><br>Não com fórmulas.
+                    </h1>
+                    <p class="hero-desc fade-up fade-up-delay-2">
+                        Acompanhamento personalizado e acumulativo — presencial ou online — que desenvolve seu repertório, sua visão crítica e sua voz no texto. Porque aprovação é consequência de quem você se torna como escritor.
+                    </p>
+                    <div class="hero-actions fade-up fade-up-delay-3">
+                        <a href="#planos" class="btn-gold">
+                            Quero começar agora
+                        </a>
+                        <a href="#mentor" class="btn-ghost">
+                            Conhecer o Prof. Coutinho
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual fade-up fade-up-delay-2">
+                    <div class="hero-frame"></div>
+                    <div class="hero-photo-wrap">
+                        <img src="perfil.png" alt="Prof. Coutinho">
+                        <div class="hero-photo-caption">
+                            <h3>Prof. Coutinho</h3>
+                            <p>8+ anos · Especialista em Escrita</p>
+                        </div>
+                    </div>
+                    <div class="hero-badge">
+                        <strong>8+</strong>
+                        <span>Anos de experiência</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <section>
-        <div class="container">
-            <h2 class="section-title">Direcionamento estratégico, não apenas uma correção.</h2>
-            <p class="section-subtitle">
-                Muitos alunos perdem meses recebendo correções em PDF que não explicam o "como" melhorar. 
-                Na minha mentoria, o processo é humano e direto.
-            </p>
+    <!-- MARQUEE -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <span>ENEM</span><span class="dot">·</span>
+            <span>UEMA</span><span class="dot">·</span>
+            <span>Redação Presencial</span><span class="dot">·</span>
+            <span>Mentoria Online</span><span class="dot">·</span>
+            <span>Repertório Autêntico</span><span class="dot">·</span>
+            <span>Leitura Estratégica</span><span class="dot">·</span>
+            <span>Gestão de Tempo</span><span class="dot">·</span>
+            <span>ENEM</span><span class="dot">·</span>
+            <span>UEMA</span><span class="dot">·</span>
+            <span>Redação Presencial</span><span class="dot">·</span>
+            <span>Mentoria Online</span><span class="dot">·</span>
+            <span>Repertório Autêntico</span><span class="dot">·</span>
+            <span>Leitura Estratégica</span><span class="dot">·</span>
+            <span>Gestão de Tempo</span><span class="dot">·</span>
+        </div>
+    </div>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⏱️</div>
-                    <h3>50 Minutos de Exclusividade</h3>
-                    <p>Atendimento individual via vídeo. O tempo é seu.</p>
+    <!-- MODALIDADES -->
+    <section class="modality-section">
+        <div class="container">
+            <div class="section-label">Como funciona</div>
+            <h2 class="section-title">Presencial ou online.<br><em>Você escolhe como evoluir.</em></h2>
+            <p class="section-body" style="max-width: 580px;">Cada aluno tem uma dinâmica diferente. Por isso a mentoria NeuroEscrita oferece dois formatos — com o mesmo rigor, a mesma profundidade, a mesma dedicação.</p>
+
+            <div class="modality-grid">
+                <div class="modality-card">
+                    <span class="modality-icon">🏠</span>
+                    <h3>Presencial</h3>
+                    <div class="modality-tag">Na sua casa · São Luís</div>
+                    <p>O Prof. Coutinho vai até você. Sem deslocamento, sem distrações de ambiente externo. A mentoria acontece no seu espaço, com toda a profundidade de um encontro humano e real. Ideal para quem aprende melhor com presença física e contato direto.</p>
+                    <div class="modality-price">
+                        R$ 100 <sub>/ encontro</sub>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎓</div>
-                    <h3>Análise de Especialista</h3>
-                    <p>Mais de 8 anos de experiência no mercado e coordenação de redação. Nada de respostas automáticas.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h3>Repertório e Leitura</h3>
-                    <p>Orientações personalizadas para o seu estilo de escrita, focadas no ENEM e na UEMA.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Solução Imediata</h3>
-                    <p>Você tira suas dúvidas na hora e entende exatamente como não repetir o mesmo erro.</p>
+
+                <div class="modality-card">
+                    <span class="modality-icon">💻</span>
+                    <h3>Online</h3>
+                    <div class="modality-tag">De onde você estiver</div>
+                    <p>Encontros via vídeo com a mesma qualidade, análise e atenção do presencial. Flexibilidade total de local — funciona de onde você estiver, com tela compartilhada e anotações em tempo real sobre o seu texto.</p>
+                    <div class="modality-price">
+                        R$ 70 <sub>/ encontro</sub>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- PILARES DA METODOLOGIA -->
     <section>
         <div class="container">
-            <div class="mentor-container">
-                <div class="mentor-text">
-                    <h2 class="section-title" style="text-align: left;">Quem é o seu Mentor</h2>
-                    <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 20px;">Prof. Coutinho</h3>
-                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px;">
-                        Especialista em escrita, gramática e literatura. Com uma trajetória sólida em São Luís, já coordenei departamentos de redação e treinei equipes de corretores.
-                    </p>
-                    <p style="color: var(--text-muted); font-size: 1.1rem;">
-                        Desenvolvi um método que foge das fórmulas prontas; aqui, você aprende a escrever com consciência e repertório de verdade. Eu não entrego apenas uma nota; entrego a estratégia para a sua aprovação.
-                    </p>
+            <div style="max-width: 600px; margin-bottom: 0;">
+                <div class="section-label">O método</div>
+                <h2 class="section-title">Uma mentoria <em>acumulativa.</em><br>Você cresce a cada encontro.</h2>
+                <p class="section-body" style="margin-bottom: 0;">
+                    Não é uma correção isolada. É um processo de desenvolvimento contínuo onde cada encontro constrói sobre o anterior — e você sai diferente de como entrou.
+                </p>
+            </div>
+
+            <div class="pillars-grid">
+                <div class="pillar">
+                    <div class="pillar-number">01</div>
+                    <h3>Estratégias de Leitura</h3>
+                    <p>Desenvolva um olhar crítico e seletivo para textos. Aprenda a absorver o que importa, identificar padrões argumentativos e transformar leitura em matéria-prima para sua escrita.</p>
                 </div>
-                <div class="mentor-img">
+                <div class="pillar">
+                    <div class="pillar-number">02</div>
+                    <h3>Escrita com Consciência</h3>
+                    <p>Pare de escrever no piloto automático. Entenda as escolhas que fazem uma frase ter peso, uma proposta ter clareza e uma argumentação ter coerência — do começo ao fim.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-number">03</div>
+                    <h3>Gestão de Tempo de Prova</h3>
+                    <p>Treinos específicos para criar ritmo, priorizar etapas e produzir uma redação de alto nível dentro do tempo da prova — sem travar, sem reescrever tudo no fim.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-number">04</div>
+                    <h3>Repertório Autêntico</h3>
+                    <p>Nada de repertório copiado de PDF genérico. Aqui você constrói referências reais — filosóficas, literárias, históricas — que se encaixam organicamente no seu texto.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-number">05</div>
+                    <h3>Fugindo do Robotizado</h3>
+                    <p>Cansado de textos que soam como fórmula? Trabalhos com sua voz, seu estilo, sua inteligência. A banca quer ler um ser humano — não uma IA com caneta.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-number">06</div>
+                    <h3>Acompanhamento de Leitura</h3>
+                    <p>Sugestões personalizadas de textos, artigos e obras baseadas no seu nível e nos temas mais relevantes para o ENEM e bancas regionais como a UEMA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENTOR -->
+    <section class="mentor-section" id="mentor">
+        <div class="container">
+            <div class="mentor-grid">
+                <div class="mentor-photo-wrap">
                     <img src="perfil.png" alt="Prof. Coutinho">
+                    <div class="mentor-photo-frame"></div>
+                    <div class="mentor-photo-quote">Método &amp; Repertório de Verdade</div>
+                </div>
+
+                <div class="mentor-content">
+                    <div class="section-label">Seu mentor</div>
+                    <h2 class="section-title">Prof. Coutinho</h2>
+                    <p class="mentor-role">Especialista em Escrita, Gramática e Literatura · São Luís — MA</p>
+
+                    <p>
+                        Com mais de 8 anos atuando no mercado de educação em São Luís, já coordenei departamentos inteiros de redação e treinei equipes de corretores. Entendo o que a banca quer — e sei o que o aluno precisa para chegar lá.
+                    </p>
+                    <p>
+                        Meu método nasce da convicção de que escrever bem é pensar bem. Por isso não trabalho com fórmulas prontas. Trabalho com você, com o que você já carrega, para desenvolver uma escrita com consciência, profundidade e identidade.
+                    </p>
+                    <p>
+                        Cada aluno é único. Por isso minha mentoria é individual, acumulativa e construída em cima da sua realidade — do seu vocabulário, das suas lacunas, do seu potencial ainda não explorado.
+                    </p>
+
+                    <div class="mentor-stats">
+                        <div class="stat">
+                            <strong>8+</strong>
+                            <span>Anos de experiência</span>
+                        </div>
+                        <div class="stat">
+                            <strong>100%</strong>
+                            <span>Individual</span>
+                        </div>
+                        <div class="stat">
+                            <strong>2</strong>
+                            <span>Formatos disponíveis</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="investimento">
+    <!-- PLANOS -->
+    <section class="plans-section" id="planos">
         <div class="container">
-            <h2 class="section-title">Planos e Investimento</h2>
-            <p class="section-subtitle">Escolha como quer evoluir sua escrita.</p>
+            <div class="plans-header">
+                <div class="section-label">Investimento</div>
+                <h2 class="section-title">Planos e <em>valores.</em></h2>
+                <p class="section-body">Cada plano inclui o acompanhamento completo do método NeuroEscrita.<br>Escolha o ritmo da sua evolução.</p>
+            </div>
 
-            <div class="pricing-grid">
-                
-                <div class="price-card">
-                    <h3 class="price-title">Avulso</h3>
-                    <p class="price-desc">Ideal para um ajuste pontual ou tirar dúvidas específicas.</p>
-                    <div class="price-value">R$ 90<span>,00</span></div>
-                    
-                    <ul class="price-features">
-                        <li>1 Encontro de 50 minutos</li>
-                        <li>Tema da redação incluso</li>
-                        <li>Correção ao vivo</li>
+            <div class="plans-grid">
+
+                <!-- AVULSO -->
+                <div class="plan-card">
+                    <div class="plan-name">Avulso</div>
+                    <div class="plan-desc">Para um ajuste pontual ou para conhecer o método antes de se comprometer.</div>
+                    <div class="plan-price">
+                        <strong>R$ 70</strong>
+                        <span> online</span><br>
+                        <strong style="font-size: 2rem;">R$ 100</strong>
+                        <span> presencial</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>1 encontro de 50 minutos</li>
+                        <li>Tema de redação incluso</li>
+                        <li>Correção e análise ao vivo</li>
+                        <li>PDF com marcações ao final</li>
                     </ul>
-
-                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Gostaria%20de%20agendar%20um%20encontro%20avulso%20de%20mentoria." target="_blank" class="btn btn-outline">
-                        Quero o Avulso
+                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Gostaria%20de%20agendar%20um%20encontro%20avulso%20de%20mentoria." target="_blank" class="btn-plan-outline">
+                        Agendar encontro
                     </a>
                 </div>
 
-                <div class="price-card featured">
-                    <div class="badge">MAIS PROCURADO</div>
-                    <h3 class="price-title">Mensal (1x Semana)</h3>
-                    <p class="price-desc">O acompanhamento ideal para criar constância e evolução.</p>
-                    <div class="price-value">R$ 280<span>,00/mês</span></div>
-                    
-                    <ul class="price-features">
-                        <li><strong>4 Encontros</strong> de 50 min/mês</li>
+                <!-- MENSAL -->
+                <div class="plan-card featured">
+                    <div class="plan-featured-badge">Mais Procurado</div>
+                    <div class="plan-name">Mensal</div>
+                    <div class="plan-desc">Constância é o que transforma habilidade em resultado. Acompanhamento semanal com evolução visível.</div>
+                    <div class="plan-price">
+                        <strong>R$ 280</strong>
+                        <span>/ mês · 1×/sem online</span>
+                        <span class="installment">ou R$ 480/mês · 2×/sem presencial ou online</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>4 ou 8 encontros de 50 min/mês</li>
                         <li>Horário fixo semanal garantido</li>
+                        <li>Até 2 encontros por semana</li>
+                        <li>Acesso ao WhatsApp para dúvidas pontuais</li>
+                        <li>Temas autênticos para diversas bancas</li>
+                        <li>Materiais personalizados para seu perfil</li>
+                        <li>Acompanhamento de leitura mensal</li>
                         <li>Acesso ao Grupo VIP</li>
-                        <li>Temas e repertórios exclusivos</li>
+                        <li>PDF com marcações de cada encontro</li>
                     </ul>
-
-                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Tenho%20interesse%20no%20Plano%20Mensal%20de%201%20encontro%20por%20semana." target="_blank" class="btn btn-primary">
-                        Quero 1x por Semana
+                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Tenho%20interesse%20no%20Plano%20Mensal%20de%20mentoria." target="_blank" class="btn-plan-gold">
+                        Quero o plano mensal
                     </a>
                 </div>
 
-                <div class="price-card">
-                    <h3 class="price-title">Mensal (2x Semana)</h3>
-                    <p class="price-desc">Aceleração total para quem quer dominar o texto rapidamente.</p>
-                    <div class="price-value">R$ 480<span>,00/mês</span></div>
-                    
-                    <ul class="price-features">
-                        <li><strong>8 Encontros</strong> de 50 min/mês</li>
-                        <li>Dois horários fixos semanais</li>
-                        <li>Acesso ao Grupo VIP</li>
-                        <li>Aceleração de resultados</li>
+                <div class="plan-card">
+                    <div class="plan-name">Semestral+</div>
+                    <div class="plan-desc">Para quem quer transformação real de março até o ENEM — 8 meses de acompanhamento contínuo.</div>
+                    <div class="plan-price">
+                        <strong>R$ 1.870</strong>
+                        <span> / 8 meses online</span>
+                        <span class="installment">Equivale a R$ 234/mês — 2 meses gratuitos</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Tudo do plano mensal</li>
+                        <li>8 meses de acompanhamento contínuo</li>
+                        <li>Curadoria de leitura personalizada por fase</li>
+                        <li>Prioridade de horário</li>
+                        <li>Acesso antecipado a novos materiais</li>
+                        <li>Relatório de evolução bimestral</li>
                     </ul>
-
-                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Quero%20acelerar%20meus%20resultados%20com%20o%20Plano%20Mensal%20de%202%20encontros%20por%20semana." target="_blank" class="btn btn-outline">
-                        Quero 2x por Semana
+                    <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Tenho%20interesse%20no%20Plano%20Semestral%2B%20de%20mentoria." target="_blank" class="btn-plan-outline">
+                        Quero o plano semestral+
                     </a>
                 </div>
 
             </div>
+
+            <div style="margin-top: 48px; display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; padding: 28px 32px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--ink-soft);">
+                <span style="font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted);">Formas de pagamento</span>
+                <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; justify-content: center;">
+                    <div style="display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 0.9rem;">
+                        <span style="font-size: 1.3rem;">⚡</span>
+                        <div>
+                            <strong style="display: block; font-weight: 600; font-size: 0.85rem;">Pix</strong>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Confirmação imediata</span>
+                        </div>
+                    </div>
+                    <div style="width: 1px; height: 36px; background: var(--border);"></div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 0.9rem;">
+                        <span style="font-size: 1.3rem;">💳</span>
+                        <div>
+                            <strong style="display: block; font-weight: 600; font-size: 0.85rem;">Cartão de crédito</strong>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Parcelamento disponível</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
-
-    <section id="faq">
+    <section class="faq-section" id="faq">
         <div class="container">
-            <h2 class="section-title">Dúvidas Frequentes</h2>
-            <br>
+            <div class="faq-header">
+                <div class="section-label">Dúvidas</div>
+                <h2 class="section-title">Perguntas <em>frequentes.</em></h2>
+            </div>
+
             <div class="faq-grid">
                 <div class="faq-item">
+                    <h3>O presencial funciona em qual região?</h3>
+                    <p>O Prof. Coutinho realiza atendimentos presenciais em São Luís — MA, indo até a casa do aluno. Logística e disponibilidade de bairros podem ser confirmadas diretamente pelo WhatsApp.</p>
+                </div>
+                <div class="faq-item">
                     <h3>Posso corrigir mais de uma redação por encontro?</h3>
-                    <p>Sim, é possível. No entanto, dependendo da complexidade do seu texto, nem sempre isso será viável. Nosso foco não é apenas "corrigir o maior número de folhas", mas garantir que você aprenda.</p>
+                    <p>Sim, é possível. No entanto, o foco não é quantidade de folhas — é a qualidade do aprendizado. Dependendo da complexidade do texto, pode ser mais produtivo trabalhar em profundidade em uma só redação.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Vou receber minha redação corrigida em PDF também?</h3>
-                    <p>Sim. Além de toda a discussão ao vivo, você recebe o PDF com as marcações feitas durante a mentoria para sua revisão posterior.</p>
+                    <h3>Recebo minha redação corrigida em PDF?</h3>
+                    <p>Sim. Além da análise ao vivo, você recebe o arquivo com as marcações feitas durante o encontro para revisão posterior e comparação da evolução ao longo do tempo.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Os horários são marcados?</h3>
-                    <p>Sim. Para os planos mensais, você terá seu horário fixo garantido toda semana. Compromisso e rotina são fundamentais para a aprovação.</p>
+                    <h3>O que é o acompanhamento de leitura?</h3>
+                    <p>Além das redações, indico textos, artigos e obras de acordo com seu nível e os temas mais cobrados. Boa escrita nasce de boa leitura — e esse processo é guiado, não aleatório.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Por que esse atendimento é melhor que uma correção comum?</h3>
-                    <p>Aqui existe análise de rendimento. Eu não aponto apenas o erro; eu te mostro como o seu cérebro está processando a escrita e como ajustar essa engrenagem para ganhar tempo e nota.</p>
+                    <h3>E se eu não tiver uma redação pronta?</h3>
+                    <p>Sem problema. Podemos usar o encontro para estratégia, planejamento de texto, discussão de eixos temáticos, leitura crítica ou aprofundamento de repertório específico.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Posso tirar dúvidas esporádicas?</h3>
-                    <p>Sim, alunos do plano mensal têm suporte para dúvidas pontuais via WhatsApp durante a semana.</p>
+                    <h3>Como funciona o acesso ao WhatsApp?</h3>
+                    <p>Alunos dos planos mensais e anuais têm acesso ao contato do Prof. Coutinho para dúvidas pontuais durante a semana — entre os encontros. Um suporte real, não automatizado.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Se eu não tiver uma redação pronta, ainda posso ter o horário?</h3>
-                    <p>Sim. Podemos usar o encontro para melhorar suas estratégias de planejamento, discutir eixos temáticos ou aprofundar repertórios específicos.</p>
+                    <h3>A mentoria serve para qual exame?</h3>
+                    <p>O foco principal é ENEM e UEMA, mas o método se aplica a redações para qualquer banca — FUVEST, UNB, vestibulares regionais e concursos públicos com componente dissertativo.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>O que significa "mentoria acumulativa"?</h3>
+                    <p>Significa que cada encontro constrói sobre o anterior. O Prof. Coutinho acompanha seu histórico, identifica padrões de erro e registra a evolução — você não recomeça do zero toda semana.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CTA FINAL -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="section-label">Próximo passo</div>
+            <h2 class="cta-quote">
+                Sua próxima redação pode ser<br><em>a que muda tudo.</em>
+            </h2>
+            <p class="cta-sub">
+                Agende agora mesmo pelo WhatsApp. Sem burocracia — uma mensagem e você já tem seu horário.
+            </p>
+            <div class="cta-actions">
+                <a href="https://wa.me/5598984417978?text=Olá,%20Prof.%20Coutinho!%20Gostaria%20de%20conhecer%20mais%20sobre%20a%20mentoria%20NeuroEscrita." target="_blank" class="btn-gold">
+                    💬 Falar com o Prof. Coutinho
+                </a>
+                <a href="#planos" class="btn-ghost">Ver planos novamente</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <h3 style="color: #fff; margin-bottom: 10px;">NeuroCorreção</h3>
-            <p>Prof. Coutinho - Todos os direitos reservados.</p>
+            <div class="logo">
+                NeuroEscrita
+                <span>Prof. Coutinho · São Luís — MA</span>
+            </div>
+            <p>© 2025 Prof. Coutinho · Todos os direitos reservados.</p>
         </div>
     </footer>
 
