@@ -1,373 +1,388 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redação sem Erro — profecoutinho</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prof. Coutinho</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0c0a;
+    --surface: #161310;
+    --border: #2a2520;
+    --gold: #c9a84c;
+    --gold-dim: #7a6330;
+    --text: #e8e0d4;
+    --muted: #6b6155;
+    --soft: #a89880;
+  }
 
-    <script type="text/javascript">
-        function importHotmart(){
-            var imported = document.createElement('script');
-            imported.src = 'https://static.hotmart.com/checkout/widget.min.js';
-            document.head.appendChild(imported);
-            var link = document.createElement('link');
-            link.rel = 'stylesheet'; link.type = 'text/css';
-            link.href = 'https://static.hotmart.com/css/hotmart-fb.min.css';
-            document.head.appendChild(link);
-        }
-        importHotmart();
-    </script>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <style>
-        :root {
-            --ink:    #111009;
-            --ink3:   #7a7060;
-            --paper:  #f7f4ee;
-            --white:  #ffffff;
-            --yellow: #f5d327;
-            --border: #e0d9cc;
-        }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+  .wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--ink);
-            color: var(--ink);
-        }
+  .hero {
+    padding: 72px 24px 56px;
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    opacity: 0;
+    animation: up 0.9s ease forwards;
+  }
 
-        /* ── HERO ── */
-        .hero {
-            background: var(--ink);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 80px 6vw;
-            position: relative;
-            overflow: hidden;
-        }
+  .perfil-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(245,211,39,0.1) 0%, transparent 60%);
-            pointer-events: none;
-        }
+  .avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-dim);
+    background: var(--surface);
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--gold);
+  }
 
-        .hero-tag {
-            display: inline-block;
-            background: rgba(245,211,39,0.12);
-            border: 1px solid rgba(245,211,39,0.25);
-            color: var(--yellow);
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            padding: 7px 18px;
-            border-radius: 100px;
-            margin-bottom: 36px;
-        }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-        .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(3rem, 7vw, 6rem);
-            color: var(--white);
-            line-height: 1.02;
-            margin-bottom: 24px;
-            position: relative; z-index: 1;
-        }
+  .nome {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--text);
+  }
 
-        .hero h1 em { font-style: italic; color: var(--yellow); }
+  .nome strong {
+    font-weight: 600;
+    color: var(--gold);
+  }
 
-        .hero p {
-            font-size: clamp(1rem, 1.5vw, 1.15rem);
-            font-weight: 500;
-            color: rgba(255,255,255,0.5);
-            line-height: 1.7;
-            max-width: 500px;
-            margin-bottom: 48px;
-        }
+  .subtitulo {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 5px;
+  }
 
-        .cta-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
+  .bio {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--soft);
+    font-weight: 300;
+    padding-left: 16px;
+    border-left: 1px solid var(--gold-dim);
+  }
 
-        .btn-buy {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--yellow);
-            color: var(--ink);
-            font-size: 1rem;
-            font-weight: 800;
-            padding: 18px 40px;
-            border-radius: 8px;
-            text-decoration: none;
-            border: none; cursor: pointer;
-            transition: transform 0.15s, filter 0.15s;
-        }
+  .div-linha {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 560px;
+    margin: 0 auto 28px;
+    padding: 0 24px;
+    opacity: 0;
+    animation: up 0.7s ease 0.25s forwards;
+  }
 
-        .btn-buy:hover { transform: translateY(-2px); filter: brightness(1.05); }
+  .div-linha::before,
+  .div-linha::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
 
-        .price-note {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: rgba(255,255,255,0.3);
-        }
+  .div-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
-        .price-note strong { color: rgba(255,255,255,0.6); }
+  .cards {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-        /* ── WHAT'S INSIDE ── */
-        .inside {
-            background: var(--paper);
-            padding: 80px 6vw;
-            text-align: center;
-        }
+  .card {
+    display: block;
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 24px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    opacity: 0;
+    animation: up 0.7s ease forwards;
+    color: inherit;
+  }
 
-        .section-label {
-            font-size: 0.68rem;
-            font-weight: 800;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--ink3);
-            margin-bottom: 14px;
-            display: block;
-        }
+  .card:nth-child(1) { animation-delay: 0.35s; }
+  .card:nth-child(2) { animation-delay: 0.5s; }
+  .card:nth-child(3) { animation-delay: 0.65s; }
 
-        .inside h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            color: var(--ink);
-            line-height: 1.1;
-            margin-bottom: 48px;
-        }
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top left, rgba(201,168,76,0.06), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
 
-        .modules {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+  .card:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-2px);
+  }
 
-        .mod {
-            background: var(--white);
-            border-radius: 14px;
-            padding: 24px 20px;
-            text-align: left;
-            border: 1.5px solid var(--border);
-        }
+  .card:hover::after { opacity: 1; }
 
-        .mod-num {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2rem;
-            color: var(--border);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
 
-        .mod h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            color: var(--ink);
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border);
-        }
+  .card-num {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+  }
 
-        .mod ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
+  .card-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.1;
+  }
 
-        .mod ul li {
-            font-size: 0.82rem;
-            font-weight: 500;
-            color: var(--ink3);
-            line-height: 1.5;
-            padding-left: 12px;
-            position: relative;
-        }
+  .preco-bloco {
+    text-align: right;
+  }
 
-        .mod ul li::before {
-            content: '–';
-            position: absolute; left: 0;
-            color: var(--yellow);
-            font-weight: 700;
-        }
+  .preco-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
 
-        /* ── CTA FINAL ── */
-        .cta-final {
-            background: var(--yellow);
-            padding: 80px 6vw;
-            text-align: center;
-        }
+  .preco-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.5;
+  }
 
-        .cta-final h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            color: var(--ink);
-            line-height: 1.1;
-            margin-bottom: 12px;
-        }
+  .topicos {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+  }
 
-        .cta-final p {
-            font-size: 1rem;
-            font-weight: 500;
-            color: rgba(20,18,16,0.55);
-            margin-bottom: 36px;
-        }
+  .topicos li {
+    font-size: 13px;
+    color: var(--soft);
+    font-weight: 300;
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    line-height: 1.5;
+  }
 
-        .price-display {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(3rem, 6vw, 5rem);
-            color: var(--ink);
-            line-height: 1;
-            margin-bottom: 28px;
-        }
+  .topicos li::before {
+    content: '—';
+    color: var(--gold-dim);
+    flex-shrink: 0;
+    font-size: 12px;
+    margin-top: 1px;
+  }
 
-        .price-display span {
-            font-size: 0.35em;
-            vertical-align: super;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-        }
+  .card-cta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
 
-        .btn-buy-dark {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--ink);
-            color: var(--yellow);
-            font-size: 1rem;
-            font-weight: 800;
-            padding: 18px 40px;
-            border-radius: 8px;
-            text-decoration: none;
-            border: none; cursor: pointer;
-            transition: transform 0.15s;
-        }
+  .card-cta svg {
+    transition: transform 0.2s;
+  }
 
-        .btn-buy-dark:hover { transform: translateY(-2px); }
+  .card:hover .card-cta svg {
+    transform: translateX(5px);
+  }
 
-        .secure {
-            display: block;
-            margin-top: 14px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: rgba(20,18,16,0.4);
-        }
+  .footer {
+    max-width: 560px;
+    margin: 48px auto 48px;
+    padding: 0 24px;
+    text-align: center;
+    opacity: 0;
+    animation: up 0.7s ease 0.9s forwards;
+  }
 
-        /* ── FOOTER ── */
-        footer {
-            background: var(--ink);
-            padding: 24px 6vw;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+  .footer p {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
 
-        footer .brand {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1rem;
-            color: var(--yellow);
-        }
-
-        footer p {
-            font-size: 0.72rem;
-            font-weight: 500;
-            color: rgba(255,255,255,0.2);
-        }
-
-        @media (max-width: 680px) {
-            .modules { grid-template-columns: 1fr; }
-        }
-    </style>
+  @keyframes up {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 <body>
 
-<!-- HERO -->
 <section class="hero">
-    <div class="hero-tag">Material impresso · Correios</div>
-    <h1>Redação<br><em>sem erro.</em></h1>
-    <p>Vírgula, crase e conectivos — os três pontos que mais derrubam nota no ENEM — num guia impresso, direto ao ponto.</p>
-    <div class="cta-group">
-        <a onclick="return false;" href="https://pay.hotmart.com/L104786811V?checkoutMode=2" class="hotmart-fb btn-buy">
-            Quero meu exemplar →
-        </a>
-        <span class="price-note">Por apenas <strong>R$ 49,90</strong> · pagamento único</span>
+  <div class="perfil-row">
+    <div class="avatar">
+      C
+      <img src="perfil" alt="Prof. Coutinho"
+        onload="this.parentElement.style.fontSize='0'"
+        onerror="this.remove()">
     </div>
-</section>
-
-<!-- CONTEÚDO -->
-<section class="inside">
-    <span class="section-label">O que tem dentro</span>
-    <h2>3 módulos.<br>Tudo que você precisa.</h2>
-
-    <div class="modules">
-        <div class="mod">
-            <div class="mod-num">01</div>
-            <h3>Vírgula</h3>
-            <ul>
-                <li>Adjunto adverbial deslocado</li>
-                <li>Aposto e enumeração</li>
-                <li>Nunca entre sujeito e verbo</li>
-                <li>Explicativa vs restritiva</li>
-                <li>Coordenadas e intercaladas</li>
-                <li>Tabela resumo completa</li>
-            </ul>
-        </div>
-        <div class="mod">
-            <div class="mod-num">02</div>
-            <h3>Crase</h3>
-            <ul>
-                <li>Teste do "ao" — infalível</li>
-                <li>Quando é obrigatório</li>
-                <li>Quando é proibido</li>
-                <li>Casos facultativos</li>
-                <li>"À medida que" vs "na medida em que"</li>
-            </ul>
-        </div>
-        <div class="mod">
-            <div class="mod-num">03</div>
-            <h3>Conectivos</h3>
-            <ul>
-                <li>Entre parágrafos</li>
-                <li>Dentro do parágrafo</li>
-                <li>Erros mais comuns</li>
-                <li>Parágrafo modelo ENEM</li>
-            </ul>
-        </div>
+    <div>
+      <div class="nome">Prof. <strong>Coutinho</strong></div>
+      <div class="subtitulo">Redação · Literatura · Linguagens</div>
     </div>
+  </div>
+  <p class="bio">
+    Anos de experiência com pré-vestibulandos. Cada aula é construída em cima da sua lacuna real — não de um cronograma genérico.
+  </p>
 </section>
 
-<!-- CTA FINAL -->
-<section class="cta-final">
-    <h2>Chega de perder ponto<br>por coisa que dá pra aprender.</h2>
-    <p>Material impresso · enviado pelos Correios · pagamento único</p>
-    <div class="price-display"><span>R$</span> 49,90</div>
-    <a onclick="return false;" href="https://pay.hotmart.com/L104786811V?checkoutMode=2" class="hotmart-fb btn-buy-dark">
-        Garantir meu guia →
-    </a>
-    <span class="secure">🔒 Pagamento seguro via Hotmart</span>
-</section>
+<div class="div-linha">
+  <span class="div-label">serviços</span>
+</div>
 
-<!-- FOOTER -->
-<footer>
-    <span class="brand">@profecoutinho</span>
-    <p>Redação sem Erro · Material impresso</p>
-</footer>
+<div class="cards">
+
+  <a class="card" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Tenho+interesse+em+aula+particular." target="_blank" rel="noopener">
+    <div class="card-top">
+      <div>
+        <div class="card-num">01</div>
+        <div class="card-titulo">Aula Particular</div>
+      </div>
+      <div class="preco-bloco">
+        <div class="preco-main">R$80</div>
+        <div class="preco-sub">online<br>R$100 presencial</div>
+      </div>
+    </div>
+    <ul class="topicos">
+      <li>Redação, linguagens e leitura no seu problema específico</li>
+      <li>ENEM, vestibular ou desenvolvimento pessoal</li>
+      <li>Interpretação, argumentação e formação de rotina leitora</li>
+      <li>Cada aula preenche uma lacuna real do seu texto</li>
+    </ul>
+    <div class="card-cta">
+      Quero aula particular
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="card" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Quero+agendar+uma+monitoria+de+reda%C3%A7%C3%A3o." target="_blank" rel="noopener">
+    <div class="card-top">
+      <div>
+        <div class="card-num">02</div>
+        <div class="card-titulo">Monitoria de Redação</div>
+      </div>
+      <div class="preco-bloco">
+        <div class="preco-main">R$50</div>
+        <div class="preco-sub">online<br>horário marcado</div>
+      </div>
+    </div>
+    <ul class="topicos">
+      <li>Sessão ao vivo com dia e hora marcados</li>
+      <li>Correção detalhada com feedback falado</li>
+      <li>Discussão de tema e proposta de intervenção</li>
+      <li>Espaço aberto pra dúvidas e argumentação</li>
+    </ul>
+    <div class="card-cta">
+      Agendar monitoria
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="card" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Quero+uma+corre%C3%A7%C3%A3o+avulsa+de+reda%C3%A7%C3%A3o." target="_blank" rel="noopener">
+    <div class="card-top">
+      <div>
+        <div class="card-num">03</div>
+        <div class="card-titulo">Correção Avulsa</div>
+      </div>
+      <div class="preco-bloco">
+        <div class="preco-main">R$30</div>
+        <div class="preco-sub">por redação<br>R$25 a partir de 4</div>
+      </div>
+    </div>
+    <ul class="topicos">
+      <li>Manda sua redação, recebe correção completa</li>
+      <li>Critérios reais de banca — não o que IA chuta</li>
+      <li>Cada competência analisada com observações concretas</li>
+      <li>Desconto progressivo a partir de 4 redações</li>
+    </ul>
+    <div class="card-cta">
+      Pedir correção avulsa
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+</div>
+
+<div class="footer">
+  <p>@profcoutinho · cada clique abre o whatsapp direto</p>
+</div>
 
 </body>
 </html>
