@@ -346,9 +346,12 @@ body {
     <div class="badge"><span class="badge-dot"></span> Professor · Redação & Linguagens</div>
 
     <div class="avatar-wrap">
-      <div class="avatar">
-        C
-        <img src="perfil.png" alt="Prof. Coutinho" onerror="this.remove()">
+      <div class="avatar" id="av">
+        <span id="av-letter">C</span>
+        <img src="perfil.png" alt="Prof. Coutinho"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none"
+          onload="this.style.display='block';document.getElementById('av-letter').style.display='none'"
+          onerror="this.remove()">
       </div>
     </div>
 
