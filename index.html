@@ -8,165 +8,119 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-:root {
-  --purple: #7c3aed;
-  --violet: #a855f7;
-  --pink: #ec4899;
-  --orange: #f97316;
-  --gold: #fbbf24;
-  --bg: #06040f;
-  --surface: rgba(255,255,255,0.04);
-  --border: rgba(255,255,255,0.08);
-  --text: #f1f0f5;
-  --muted: rgba(255,255,255,0.45);
-}
-
-html { scroll-behavior: smooth; }
-
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: #0a0812;
+  color: #f0eeff;
   font-family: 'Inter', sans-serif;
-  min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* ── GLOW BG ── */
-.bg-glow {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.glow-1 {
-  position: absolute;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(124,58,237,0.35) 0%, transparent 70%);
-  top: -200px; left: -200px;
-  animation: drift1 8s ease-in-out infinite alternate;
-}
-.glow-2 {
-  position: absolute;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(236,72,153,0.25) 0%, transparent 70%);
-  top: 100px; right: -150px;
-  animation: drift2 10s ease-in-out infinite alternate;
-}
-.glow-3 {
-  position: absolute;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%);
-  bottom: 200px; left: 50%;
-  animation: drift1 12s ease-in-out infinite alternate;
-}
-@keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(40px, 30px); } }
-@keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-30px, 40px); } }
-
-/* ── TUDO RELATIVO AO GLOW ── */
-.page { position: relative; z-index: 1; }
-
 /* ── HERO ── */
 .hero {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding: 80px 24px 60px;
-  max-width: 640px;
-  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
 }
+
+/* gradiente de fundo vibrante mas controlado */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(109,40,217,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(219,39,119,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(234,88,12,0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 560px; }
 
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(124,58,237,0.2);
-  border: 1px solid rgba(124,58,237,0.4);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 100px;
-  padding: 6px 16px;
+  padding: 7px 18px;
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--violet);
-  margin-bottom: 32px;
-  width: fit-content;
-  animation: fadeUp 0.6s ease forwards;
-  opacity: 0;
+  color: #e0d4ff;
+  margin-bottom: 36px;
 }
 .badge-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--violet);
-  box-shadow: 0 0 8px var(--violet);
+  background: #c084fc;
+  box-shadow: 0 0 8px #c084fc;
   animation: pulse 2s ease-in-out infinite;
 }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-.perfil-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 36px;
-  opacity: 0;
-  animation: fadeUp 0.6s ease 0.1s forwards;
+.avatar-wrap {
+  margin-bottom: 16px;
 }
-
 .avatar {
-  width: 130px; height: 130px;
+  width: 120px; height: 120px;
   border-radius: 50%;
+  margin: 0 auto;
   border: 3px solid transparent;
-  background: linear-gradient(var(--bg), var(--bg)) padding-box,
-              linear-gradient(135deg, var(--purple), var(--pink)) border-box;
+  background: linear-gradient(#0a0812, #0a0812) padding-box,
+              linear-gradient(135deg, #7c3aed, #ec4899) border-box;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: 48px;
+  font-size: 44px;
   font-weight: 800;
-  color: var(--violet);
-  flex-shrink: 0;
-  position: relative;
-  box-shadow: 0 0 40px rgba(124,58,237,0.3);
+  color: #c084fc;
+  box-shadow: 0 0 0 6px rgba(124,58,237,0.15), 0 20px 60px rgba(0,0,0,0.5);
 }
 .avatar img {
   width: 100%; height: 100%;
   object-fit: cover;
-  position: absolute; inset: 0;
 }
 
-.perfil-info { text-align: center; }
 .perfil-nome {
   font-family: 'Syne', sans-serif;
   font-size: 22px;
   font-weight: 700;
   color: #fff;
+  margin-bottom: 4px;
 }
 .perfil-sub {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 4px;
-  letter-spacing: 0.05em;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 40px;
 }
 
 .hero-headline {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(36px, 10vw, 52px);
+  font-size: clamp(38px, 10vw, 56px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.05;
   color: #fff;
   margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeUp 0.7s ease 0.2s forwards;
 }
-.hero-headline .grad {
-  background: linear-gradient(90deg, var(--violet), var(--pink), var(--orange));
+.hero-headline .g1 {
+  background: linear-gradient(90deg, #a78bfa, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-headline .g2 {
+  background: linear-gradient(90deg, #fb923c, #f59e0b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -174,108 +128,99 @@ body {
 
 .hero-sub {
   font-size: 15px;
-  line-height: 1.7;
-  color: var(--muted);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.55);
   font-weight: 300;
-  max-width: 480px;
-  margin-bottom: 40px;
-  opacity: 0;
-  animation: fadeUp 0.7s ease 0.3s forwards;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
-/* faixa ticker */
+/* ── TICKER ── */
 .ticker-wrap {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  width: 100%;
   overflow: hidden;
-  background: linear-gradient(90deg, var(--purple), var(--pink), var(--orange), var(--purple));
-  background-size: 300%;
-  animation: gradMove 6s linear infinite;
-  padding: 10px 0;
-  margin-bottom: 60px;
+  background: linear-gradient(90deg, #6d28d9, #db2777, #ea580c);
+  padding: 11px 0;
 }
-@keyframes gradMove { 0%{background-position:0%} 100%{background-position:300%} }
-
 .ticker {
   display: flex;
-  gap: 0;
   white-space: nowrap;
-  animation: ticker 20s linear infinite;
+  animation: ticker 22s linear infinite;
 }
 .ticker span {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #fff;
-  padding: 0 28px;
+  padding: 0 24px;
 }
-.ticker span::after { content: '✦'; padding-left: 28px; }
+.ticker span::after { content: ' ✦'; }
 @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* ── SEÇÃO SERVIÇOS ── */
-.section {
-  max-width: 640px;
+/* ── SERVIÇOS ── */
+.servicos {
+  max-width: 600px;
   margin: 0 auto;
-  padding: 0 24px 80px;
+  padding: 64px 20px 80px;
 }
 
-.section-label {
+.sec-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.sec-label {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--violet);
-  margin-bottom: 12px;
+  color: #a78bfa;
+  margin-bottom: 10px;
 }
-.section-title {
+.sec-title {
   font-family: 'Syne', sans-serif;
   font-size: 28px;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 32px;
   line-height: 1.2;
 }
 
-/* CARDS */
 .cards { display: flex; flex-direction: column; gap: 16px; }
 
 .card {
   display: block;
   text-decoration: none;
   color: inherit;
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 28px;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.3s;
-  opacity: 0;
-  animation: fadeUp 0.7s ease forwards;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.card:nth-child(1){animation-delay:0.1s}
-.card:nth-child(2){animation-delay:0.25s}
-.card:nth-child(3){animation-delay:0.4s}
 
-.card-glow {
+/* cada card tem cor sólida de fundo para contraste real */
+.card-1 { background: linear-gradient(135deg, #1e1040 0%, #2d1060 100%); border: 1px solid rgba(167,139,250,0.3); }
+.card-2 { background: linear-gradient(135deg, #1a0828 0%, #3b0764 100%); border: 1px solid rgba(236,72,153,0.3); }
+.card-3 { background: linear-gradient(135deg, #1c0e04 0%, #431407 100%); border: 1px solid rgba(251,146,60,0.3); }
+
+.card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+.card-1:hover { box-shadow: 0 20px 60px rgba(109,40,217,0.3); }
+.card-2:hover { box-shadow: 0 20px 60px rgba(219,39,119,0.3); }
+.card-3:hover { box-shadow: 0 20px 60px rgba(234,88,12,0.3); }
+
+/* orb decorativo interno */
+.card::before {
+  content: '';
   position: absolute;
-  width: 200px; height: 200px;
+  width: 180px; height: 180px;
   border-radius: 50%;
-  top: -80px; right: -60px;
-  opacity: 0;
-  transition: opacity 0.4s;
+  top: -60px; right: -40px;
   pointer-events: none;
+  opacity: 0.5;
 }
-.card:nth-child(1) .card-glow { background: radial-gradient(circle, rgba(124,58,237,0.4), transparent 70%); }
-.card:nth-child(2) .card-glow { background: radial-gradient(circle, rgba(236,72,153,0.4), transparent 70%); }
-.card:nth-child(3) .card-glow { background: radial-gradient(circle, rgba(249,115,22,0.4), transparent 70%); }
-
-.card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-.card:hover .card-glow { opacity: 1; }
-.card:nth-child(1):hover { border-color: rgba(124,58,237,0.5); }
-.card:nth-child(2):hover { border-color: rgba(236,72,153,0.5); }
-.card:nth-child(3):hover { border-color: rgba(249,115,22,0.5); }
+.card-1::before { background: radial-gradient(circle, rgba(139,92,246,0.5), transparent 70%); }
+.card-2::before { background: radial-gradient(circle, rgba(236,72,153,0.5), transparent 70%); }
+.card-3::before { background: radial-gradient(circle, rgba(251,146,60,0.5), transparent 70%); }
 
 .card-top {
   display: flex;
@@ -283,22 +228,24 @@ body {
   align-items: flex-start;
   margin-bottom: 20px;
   gap: 12px;
+  position: relative;
 }
 
 .card-num {
   font-size: 10px;
-  letter-spacing: 0.15em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
-.card:nth-child(1) .card-num { color: var(--violet); }
-.card:nth-child(2) .card-num { color: var(--pink); }
-.card:nth-child(3) .card-num { color: var(--orange); }
+.card-1 .card-num { color: #c4b5fd; }
+.card-2 .card-num { color: #f9a8d4; }
+.card-3 .card-num { color: #fdba74; }
 
 .card-titulo {
   font-family: 'Syne', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 21px;
+  font-weight: 800;
   color: #fff;
   line-height: 1.2;
 }
@@ -306,17 +253,17 @@ body {
 .preco-bloco { text-align: right; flex-shrink: 0; }
 .preco-main {
   font-family: 'Syne', sans-serif;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 800;
   line-height: 1;
 }
-.card:nth-child(1) .preco-main { color: var(--violet); }
-.card:nth-child(2) .preco-main { color: var(--pink); }
-.card:nth-child(3) .preco-main { color: var(--orange); }
+.card-1 .preco-main { color: #c4b5fd; }
+.card-2 .preco-main { color: #f9a8d4; }
+.card-3 .preco-main { color: #fdba74; }
 
 .preco-sub {
   font-size: 11px;
-  color: var(--muted);
+  color: rgba(255,255,255,0.4);
   margin-top: 4px;
   line-height: 1.5;
 }
@@ -327,222 +274,190 @@ body {
   flex-direction: column;
   gap: 10px;
   margin-bottom: 24px;
+  position: relative;
 }
 .topicos li {
-  font-size: 13.5px;
-  color: rgba(255,255,255,0.6);
-  font-weight: 300;
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 300;
   line-height: 1.5;
 }
-.topicos li .icon {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  flex-shrink: 0;
+.check {
+  width: 20px; height: 20px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
   margin-top: 1px;
-  font-size: 9px;
 }
-.card:nth-child(1) .icon { background: rgba(124,58,237,0.25); color: var(--violet); }
-.card:nth-child(2) .icon { background: rgba(236,72,153,0.25); color: var(--pink); }
-.card:nth-child(3) .icon { background: rgba(249,115,22,0.25); color: var(--orange); }
+.card-1 .check { background: rgba(139,92,246,0.3); color: #c4b5fd; }
+.card-2 .check { background: rgba(236,72,153,0.3); color: #f9a8d4; }
+.card-3 .check { background: rgba(251,146,60,0.3); color: #fdba74; }
 
-.card-btn {
+.btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   border-radius: 12px;
   font-family: 'Syne', sans-serif;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.2s;
+  color: #fff;
   border: none;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.2s;
+  position: relative;
 }
-.card:nth-child(1) .card-btn { background: linear-gradient(90deg, var(--purple), var(--violet)); color: #fff; }
-.card:nth-child(2) .card-btn { background: linear-gradient(90deg, #be185d, var(--pink)); color: #fff; }
-.card:nth-child(3) .card-btn { background: linear-gradient(90deg, #c2410c, var(--orange)); color: #fff; }
-.card-btn:hover { opacity: 0.9; transform: scale(0.99); }
-.card-btn svg { transition: transform 0.2s; }
-.card:hover .card-btn svg { transform: translateX(4px); }
+.card-1 .btn { background: linear-gradient(90deg, #6d28d9, #8b5cf6); }
+.card-2 .btn { background: linear-gradient(90deg, #be185d, #ec4899); }
+.card-3 .btn { background: linear-gradient(90deg, #c2410c, #f97316); }
+.btn:hover { filter: brightness(1.15); transform: scale(0.99); }
+.btn svg { transition: transform 0.2s; }
+.card:hover .btn svg { transform: translateX(4px); }
 
 /* ── FOOTER ── */
 .footer {
   text-align: center;
-  padding: 20px 24px 48px;
-  position: relative; z-index: 1;
+  padding: 16px 24px 48px;
 }
 .footer p {
   font-size: 11px;
-  color: var(--muted);
+  color: rgba(255,255,255,0.25);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 <body>
 
-<div class="bg-glow">
-  <div class="glow-1"></div>
-  <div class="glow-2"></div>
-  <div class="glow-3"></div>
-</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span> Professor · Redação & Linguagens</div>
 
-<div class="page">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="badge">
-      <span class="badge-dot"></span>
-      Professor · Redação & Linguagens
-    </div>
-
-    <div class="perfil-row">
+    <div class="avatar-wrap">
       <div class="avatar">
         C
         <img src="perfil.png" alt="Prof. Coutinho" onerror="this.remove()">
       </div>
-      <div class="perfil-info">
-        <div class="perfil-nome">Prof. Coutinho</div>
-        <div class="perfil-sub">Anos de experiência com ENEM e vestibular</div>
-      </div>
     </div>
+
+    <div class="perfil-nome">Prof. Coutinho</div>
+    <div class="perfil-sub">Anos de experiência com ENEM e vestibular</div>
 
     <h1 class="hero-headline">
       Sua redação<br>
-      <span class="grad">do problema<br>à solução.</span>
+      <span class="g1">do problema</span><br>
+      <span class="g2">à solução.</span>
     </h1>
-
-    <p class="hero-sub">
-      Não trabalho com cronograma genérico. Cada aula existe pra preencher uma lacuna real no seu texto — e te deixar mais perto da vaga que você quer.
-    </p>
-  </section>
-
-  <!-- TICKER -->
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span>Aula Particular</span>
-      <span>Monitoria Online</span>
-      <span>Correção Avulsa</span>
-      <span>ENEM</span>
-      <span>Vestibular</span>
-      <span>Redação</span>
-      <span>Literatura</span>
-      <span>Linguagens</span>
-      <span>Aula Particular</span>
-      <span>Monitoria Online</span>
-      <span>Correção Avulsa</span>
-      <span>ENEM</span>
-      <span>Vestibular</span>
-      <span>Redação</span>
-      <span>Literatura</span>
-      <span>Linguagens</span>
-    </div>
+    <p class="hero-sub">Não trabalho com cronograma genérico. Cada aula existe pra preencher uma lacuna real no seu texto — e te deixar mais perto da vaga que você quer.</p>
   </div>
+</section>
 
-  <!-- SERVIÇOS -->
-  <section class="section">
-    <div class="section-label">O que eu ofereço</div>
-    <div class="section-title">Escolha o que faz<br>sentido pra você</div>
-
-    <div class="cards">
-
-      <!-- AULA PARTICULAR -->
-      <a class="card" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Tenho+interesse+em+aula+particular." target="_blank" rel="noopener">
-        <div class="card-glow"></div>
-        <div class="card-top">
-          <div>
-            <div class="card-num">Serviço 01</div>
-            <div class="card-titulo">Aula Particular</div>
-          </div>
-          <div class="preco-bloco">
-            <div class="preco-main">R$80</div>
-            <div class="preco-sub">online<br>R$100 presencial</div>
-          </div>
-        </div>
-        <ul class="topicos">
-          <li><span class="icon">✓</span> Redação e linguagens no seu problema específico</li>
-          <li><span class="icon">✓</span> ENEM, vestibular ou escrita pessoal</li>
-          <li><span class="icon">✓</span> Interpretação, argumentação e rotina leitora</li>
-          <li><span class="icon">✓</span> Cada aula ataca uma lacuna real do seu texto</li>
-        </ul>
-        <div class="card-btn">
-          Quero aula particular
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- MONITORIA -->
-      <a class="card" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Quero+agendar+uma+monitoria+de+reda%C3%A7%C3%A3o." target="_blank" rel="noopener">
-        <div class="card-glow"></div>
-        <div class="card-top">
-          <div>
-            <div class="card-num">Serviço 02</div>
-            <div class="card-titulo">Monitoria de Redação</div>
-          </div>
-          <div class="preco-bloco">
-            <div class="preco-main">R$50</div>
-            <div class="preco-sub">online<br>horário marcado</div>
-          </div>
-        </div>
-        <ul class="topicos">
-          <li><span class="icon">✓</span> Sessão ao vivo com dia e hora marcados</li>
-          <li><span class="icon">✓</span> Correção detalhada com feedback falado</li>
-          <li><span class="icon">✓</span> Discussão de tema e proposta de intervenção</li>
-          <li><span class="icon">✓</span> Espaço aberto pra dúvidas e argumentação</li>
-        </ul>
-        <div class="card-btn">
-          Agendar monitoria
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- CORREÇÃO AVULSA -->
-      <a class="card" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Quero+uma+corre%C3%A7%C3%A3o+avulsa+de+reda%C3%A7%C3%A3o." target="_blank" rel="noopener">
-        <div class="card-glow"></div>
-        <div class="card-top">
-          <div>
-            <div class="card-num">Serviço 03</div>
-            <div class="card-titulo">Correção Avulsa</div>
-          </div>
-          <div class="preco-bloco">
-            <div class="preco-main">R$30</div>
-            <div class="preco-sub">por redação<br>R$25 a partir de 4</div>
-          </div>
-        </div>
-        <ul class="topicos">
-          <li><span class="icon">✓</span> Manda sua redação, recebe correção completa</li>
-          <li><span class="icon">✓</span> Critérios reais de banca — não o que IA chuta</li>
-          <li><span class="icon">✓</span> Cada competência analisada com observações concretas</li>
-          <li><span class="icon">✓</span> Desconto progressivo a partir de 4 redações</li>
-        </ul>
-        <div class="card-btn">
-          Pedir correção avulsa
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
-  <div class="footer">
-    <p>@profcoutinho · cada botão abre o whatsapp direto</p>
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>Vestibular</span><span>Redação</span><span>Literatura</span><span>Linguagens</span>
+    <span>Aula Particular</span><span>Monitoria Online</span><span>Correção Avulsa</span><span>ENEM</span>
+    <span>Vestibular</span><span>Redação</span><span>Literatura</span><span>Linguagens</span>
+    <span>Aula Particular</span><span>Monitoria Online</span><span>Correção Avulsa</span><span>ENEM</span>
   </div>
-
 </div>
+
+<!-- SERVIÇOS -->
+<section class="servicos">
+  <div class="sec-header">
+    <div class="sec-label">O que eu ofereço</div>
+    <div class="sec-title">Escolha o que faz sentido pra você</div>
+  </div>
+
+  <div class="cards">
+
+    <a class="card card-1" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Tenho+interesse+em+aula+particular." target="_blank" rel="noopener">
+      <div class="card-top">
+        <div>
+          <div class="card-num">Serviço 01</div>
+          <div class="card-titulo">Aula Particular</div>
+        </div>
+        <div class="preco-bloco">
+          <div class="preco-main">R$80</div>
+          <div class="preco-sub">online<br>R$100 presencial</div>
+        </div>
+      </div>
+      <ul class="topicos">
+        <li><span class="check">✓</span> Redação e linguagens no seu problema específico</li>
+        <li><span class="check">✓</span> ENEM, vestibular ou desenvolvimento pessoal</li>
+        <li><span class="check">✓</span> Interpretação, argumentação e rotina leitora</li>
+        <li><span class="check">✓</span> Cada aula preenche uma lacuna real do seu texto</li>
+      </ul>
+      <div class="btn">
+        Quero aula particular
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a class="card card-2" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Quero+agendar+uma+monitoria+de+reda%C3%A7%C3%A3o." target="_blank" rel="noopener">
+      <div class="card-top">
+        <div>
+          <div class="card-num">Serviço 02</div>
+          <div class="card-titulo">Monitoria de Redação</div>
+        </div>
+        <div class="preco-bloco">
+          <div class="preco-main">R$50</div>
+          <div class="preco-sub">online<br>horário marcado</div>
+        </div>
+      </div>
+      <ul class="topicos">
+        <li><span class="check">✓</span> Sessão ao vivo com dia e hora marcados</li>
+        <li><span class="check">✓</span> Correção detalhada com feedback falado</li>
+        <li><span class="check">✓</span> Discussão de tema e proposta de intervenção</li>
+        <li><span class="check">✓</span> Espaço aberto pra dúvidas e argumentação</li>
+      </ul>
+      <div class="btn">
+        Agendar monitoria
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a class="card card-3" href="https://wa.me/5598984417978?text=Ol%C3%A1%2C+Prof.+Coutinho%21+Quero+uma+corre%C3%A7%C3%A3o+avulsa+de+reda%C3%A7%C3%A3o." target="_blank" rel="noopener">
+      <div class="card-top">
+        <div>
+          <div class="card-num">Serviço 03</div>
+          <div class="card-titulo">Correção Avulsa</div>
+        </div>
+        <div class="preco-bloco">
+          <div class="preco-main">R$30</div>
+          <div class="preco-sub">por redação<br>R$25 a partir de 4</div>
+        </div>
+      </div>
+      <ul class="topicos">
+        <li><span class="check">✓</span> Manda sua redação, recebe correção completa</li>
+        <li><span class="check">✓</span> Critérios reais de banca — não o que IA chuta</li>
+        <li><span class="check">✓</span> Cada competência analisada com observações concretas</li>
+        <li><span class="check">✓</span> Desconto progressivo a partir de 4 redações</li>
+      </ul>
+      <div class="btn">
+        Pedir correção avulsa
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="footer">
+  <p>@profcoutinho · cada botão abre o whatsapp direto</p>
+</div>
+
 </body>
 </html>
